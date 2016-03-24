@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:form id="formDataTable">
+
+	<p:dataTable id="frnDataList" var="frn" value="#{fornitoriDTView.frn2}"
+		paginator="true" rows="10"
+		selectionMode="single" selection="#{fornitoriDTView.selectedFornitore}"
+		rowKey="#{frn.model}">
+		<f:facet name="header">
+            Lista Fornitori
+        </f:facet>
+		<p:column headerText="Model">
+			<h:outputText value="#{frn.model}" />
+		</p:column>
+		<p:column headerText="Year">
+			<h:outputText value="#{frn.year}" />
+		</p:column>
+		<p:column headerText="Brand">
+			<h:outputText value="#{frn.brand}" />
+		</p:column>
+		<p:column headerText="Color">
+			<h:outputText value="#{frn.color}" />
+		</p:column>
+        <p:column style="width:24px;text-align: center">
+             <p:commandButton update=":formDataTable:frnDetail" oncomplete="PF('frnDialog').show()" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{frn}" target="#{fornitoriDTView.selectedFornitore}" />
+            </p:commandButton>
+        </p:column>
+		<f:facet name="footer">
+			<p:commandButton process="frnDataList" update=":formDataTable:frnDetail"
+				icon="ui-icon-search" value="Dettaglio"
+				oncomplete="PF('frnDialog').show()" />
+		</f:facet>
+	</p:dataTable>
+
+	<p:dialog header="Info Fornitore" widgetVar="frnDialog" modal="true"
+		showEffect="blind" hideEffect="explode" resizable="false">
+		<p:outputPanel id="frnDetail" style="text-align:center;">
+			<p:panelGrid columns="2"
+				rendered="#{not empty fornitoriDTView.selectedFornitore}"
+				columnClasses="label,value">
+				<f:facet name="header">
+					<p:graphicImage
+						name="../demo/images/car/#{fornitoriDTView.selectedFornitore.brand}-big.gif" />
+				</f:facet>
+
+				<h:outputText value="Brand:" />
+				<h:outputText value="#{fornitoriDTView.selectedFornitore.brand}" />
+
+				<h:outputText value="Model:" />
+				<h:outputText value="#{fornitoriDTView.selectedFornitore.model}" />
+
+				<h:outputText value="Year" />
+				<h:outputText value="#{fornitoriDTView.selectedFornitore.year}" />
+
+				<h:outputText value="Color:" />
+				<h:outputText value="#{fornitoriDTView.selectedFornitore.color}" />
+
+				<h:outputText value="Price" />
+				<h:outputText value="$#{fornitoriDTView.selectedFornitore.price}" />
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+</h:form>
+
+</html>

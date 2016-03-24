@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:panelGrid columns="4" cellpadding="2">
+		<p:outputLabel for="famiglia" value="#{bundle.famiglia}*: " />
+		<p:selectOneMenu id="famiglia" style="width:250px"
+			value="#{prodassbean.famiglia}"
+			onchange="famigliaChangeHandler(this)"
+			disabled="#{prodassbean.readonly}" >
+			
+			<p:ajax listener="#{prodassbean.onFamigliaChange}" update="@this" />
+
+			<f:selectItem itemLabel="#{bundle.seleziona}" itemValue="" noSelectionOption="true" />
+			<f:selectItems value="#{prodassbean.famiglie}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel for="tipologia" value="#{bundle.tipologia}*: " />
+		<p:selectOneMenu id="tipologia" style="width:250px"
+			value="#{prodassbean.tipologia}"
+			onchange="tipologiaChangeHandler(this)"
+			disabled="#{prodassbean.readonly}" >
+			
+			<p:ajax listener="#{prodassbean.onTipologiaChange}" update="@this" />
+			
+			<f:selectItem itemLabel="#{bundle.seleziona}" itemValue=""
+				noSelectionOption="true" />
+			<f:selectItems value="#{prodassbean.tipologie}" />
+		</p:selectOneMenu>
+	</h:panelGrid>
+	
+	<h:panelGrid columns="5" cellpadding="2">
+		<h:outputLabel for="nomeMateriale" value="#{bundle.nomeMateriale}*: " />
+		<p:autoComplete id="nomeMateriale" minQueryLength="3"
+			value="#{prodassbean.asmbl.assemblato}"
+			completeMethod="#{prodassbean.completeNomeAssemblato}"
+			disabled="#{prodassbean.readonly}" 
+			effect="fade" size="40">
+			<p:ajax event="itemSelect" listener="#{prodassbean.popolaCodiceAssemblato}" process="@form" update="@form"/> 
+			<p:ajax event="click" listener="#{prodassbean.clickCodiceAssemblato}" process="@form" update="@form"/>
+   		</p:autoComplete>
+
+		<h:outputLabel for="codiceMateriale" value="#{bundle.codiceMateriale}: " />
+		<h:outputText id="lblCodiceMateriale" style="font-weight:bold" />
+
+		<p:inputText value="#{prodassbean.asmbl.codAssemblato}" id="codiceMateriale" size="18" readonly="true" style="background-color: lightgrey;"/>
+		
+	</h:panelGrid>
+	
+	<h:panelGrid columns="2" cellpadding="2">
+		<p:commandButton id="btnSalva" icon="ui-icon-disk" update="@form"
+			
+			value="#{bundle.salva}"
+			action="#{prodassbean.saveAssemblato}"
+			disabled="#{prodassbean.disable}" />
+
+		<p:commandButton id="btnAggiorna" icon="ui-icon-disk" update="@form"
+
+			value="#{bundle.aggiorna}"
+			action="#{prodassbean.updateAssemblato}"
+			rendered="#{prodassbean.updateRendered}" />
+	</h:panelGrid>
+	
+</html>

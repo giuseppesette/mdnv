@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:form id="formDataTable">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<p:dataTable id="clientiDataList" var="cliente" value="#{lclientebean.clientiLista}"
+		paginator="true" rows="10"
+		selectionMode="single" 
+		selection="#{lclientebean.selectedCliente}"
+		rowKey="#{cliente.codCliente}">
+		
+		<p:ajax event="rowSelect" listener="#{lclientebean.onRowClienteSelect}" />
+		
+		<f:facet name="header">
+            #{bundle.listaClienti}
+        </f:facet>
+		<p:column headerText="#{bundle.codiceCliente}">
+			<h:outputText value="#{cliente.codCliente}" />
+		</p:column>
+		<p:column headerText="#{bundle.ragioneSociale}">
+			<h:outputText value="#{cliente.ragioneSociale}" />
+		</p:column>
+		<p:column headerText="#{bundle.canale}">
+			<h:outputText value="#{cliente.canale}" />
+		</p:column>
+		<p:column headerText="#{bundle.dataInserimento}">
+			<h:outputText value="#{cliente.dataInserimento}" />
+		</p:column>
+		<!-- 
+        <p:column style="width:24px;text-align: center">
+             <p:commandButton update=":formDataTable:frnDetail" oncomplete="PF('frnDialog').show()" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{frn}" target="#{fornitoriDTView.selectedFornitore}" />
+            </p:commandButton>
+        </p:column>
+         -->
+		<f:facet name="footer">
+			<p:commandButton process="clientiDataList" 
+				action="#{lclientebean.editCliente}" 
+				icon="ui-icon-pencil" value="#{bundle.modifica}"
+				title="#{bundle.modificaCliente}"/>
+				
+			<p:commandButton process="clientiDataList" 
+				action="#{lclientebean.cancellaCliente}" 
+				icon="ui-icon-close" value="#{bundle.elimina}"
+				title="#{bundle.eliminaCliente}"
+				update="@form" ajax="true"
+				/>
+		</f:facet>
+	</p:dataTable>
+
+</h:form>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/pftemplates/MdnvTemplate.xhtml">
+	<ui:define name="content">
+		<h:outputLabel value="Benvenuto ">'<b>#{userMB.user.name}</b>' nel Desktop di <b>MODONOVO <i>Business Management</i></b>!</h:outputLabel>
+		<p:separator />
+		<div id="dtContatti">
+			<ui:insert name="dtContatti">
+			
+				<h:form id="formDataTable">
+					<p:messages autoUpdate="true" display="text" closable="true"/>
+
+					<p:dataTable id="contattiDataList" var="contatto" value="#{lcontattobean.contattiLista}" widgetVar="contactsTable"
+						paginator="true" rows="10"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15,20,25,30,50" 
+						selectionMode="single" 
+						selection="#{lcontattobean.selectedContatto}"
+						rowKey="#{contatto.id}">
+				<!-- 		
+				
+						rowIndexVar="rowIndex"
+						rowStyleClass="#{(rowIndex mod 2) eq 0 ? 'colored' : null}" 
+				
+				rowStyleClass="#{contatto.mail1 eq 'allsystem@tin.it' ? 'colored' : null}"
+				
+<style type="text/css">
+.colored {
+background-color: red;
+color: yellow;
+}
+</style>
+				
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="5,10,15" 
+                 lazy="true"
+				 -->	
+						<p:ajax event="rowSelect" listener="#{lcontattobean.onRowContattoSelect}" />
+						
+						<f:facet name="header">
+						<!--  
+							<h:outputText value="#{bundle.listaContatti}" />
+						-->
+				            <p:outputPanel>
+				                <h:outputText value="Ricerca in tutti i campi:  " />
+				                <p:inputText id="globalFilter" onkeyup="PF('contactsTable').filter()" style="width:150px" placeholder="Parola chiave...."/>
+				            </p:outputPanel>
+				        </f:facet>
+
+				        
+						<p:column headerText="#{bundle.id}">
+							<h:outputText value="#{contatto.id}" />
+						</p:column>
+						<p:column headerText="#{bundle.ragioneSociale}">
+							<h:outputText value="#{contatto.ragioneSociale}" />
+						</p:column>
+						<p:column headerText="#{bundle.mail}">
+							<h:outputText value="#{contatto.mail1}" />
+						</p:column>
+						<p:column headerText="#{bundle.telefono}">
+							<h:outputText value="#{contatto.telefono1}" />
+						</p:column>
+
+						<f:facet name="footer">
+							<p:commandButton process="contattiDataList" 
+								action="#{lcontattobean.nuovoContatto}" 
+								icon="ui-icon-check" value="#{bundle.inserisci}"
+								title="#{bundle.nuovoContatto}" >
+								<f:param name="here" value="home" />
+							</p:commandButton>
+
+							<p:commandButton process="contattiDataList" 
+								action="#{lcontattobean.editContatto}" 
+								icon="ui-icon-pencil" value="#{bundle.modifica}"
+								title="#{bundle.modificaContatto}" >
+								<f:param name="here" value="home" />
+							</p:commandButton>
+								
+							<p:commandButton process="contattiDataList" 
+								action="#{lcontattobean.cancellaContatto}" 
+								icon="ui-icon-close" value="#{bundle.elimina}"
+								title="#{bundle.eliminaContatto}"
+								update="@form" ajax="true"
+								/>
+						</f:facet>
+					</p:dataTable>
+					<p:separator />
+				</h:form>
+			</ui:insert>
+		</div>
+	</ui:define>
+</ui:composition>
+
+</html>

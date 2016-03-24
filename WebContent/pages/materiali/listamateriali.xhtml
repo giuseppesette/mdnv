@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<style>
+
+.myTable td {
+    font-size: 12px;
+}
+
+/* ID */
+.myTable td:nth-child(1) {
+    width: 10px;
+    font-weight: bold;
+}
+/* Nome Prodotto */
+.myTable td:nth-child(2) {
+    width: 260px;
+}
+/* Famiglia */
+.myTable td:nth-child(3) {
+    width: 240px;
+}
+/* Tipologia */
+.myTable td:nth-child(4) {
+    width: 140px;
+}
+/* Codice Prodotto */
+.myTable td:nth-child(5) {
+    width: 50px;
+}
+</style>
+	
+<h:form id="formDataTable">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<p:dataTable id="materialiDataList" var="prodotto" value="#{lprodottibean.prodottiLista}"
+		paginator="true" rows="15"
+		styleClass="myTable"
+		selectionMode="single" 
+		selection="#{lprodottibean.selectedProdotto}"
+		rowKey="#{prodotto.prodottiId}">
+		
+		<p:ajax event="rowSelect" listener="#{lprodottibean.onRowProdottoSelect}" />
+		
+		<f:facet name="header">
+            #{bundle.listaProdotti}
+        </f:facet>
+		<p:column headerText="#{bundle.id}">
+			<h:outputText value="#{prodotto.prodottiId}" />
+		</p:column>
+		<p:column headerText="#{bundle.nomeProdotto}">
+			<h:outputText value="#{prodotto.prodotto}" />
+		</p:column>
+		<p:column headerText="#{bundle.famiglia}">
+			<h:outputText value="#{prodotto.famiglia.famiglia}" />
+		</p:column>
+		<p:column headerText="#{bundle.tipologia}">
+			<h:outputText value="#{prodotto.tipologie.tipologia}" />
+		</p:column>
+		<p:column headerText="#{bundle.codProdotto}">
+			<h:outputText value="#{prodotto.codProdotto}" />
+		</p:column>
+		<p:column headerText="#{bundle.descMateriale}">
+			<h:outputText value="#{prodotto.descrizione}" />
+		</p:column>
+		<p:column headerText="#{bundle.materiale}">
+			<h:outputText value="#{prodotto.materiale}" />
+		</p:column>
+
+		<f:facet name="footer">
+			<p:commandButton process="materialiDataList" 
+				action="#{lprodottibean.editProdotto}" 
+				icon="ui-icon-pencil" value="#{bundle.modifica}"
+				title="#{bundle.modificaProdotto}"/>
+				
+			<p:commandButton process="materialiDataList" 
+				action="#{lprodottibean.cancellaProdotto}" 
+				icon="ui-icon-close" value="#{bundle.elimina}"
+				title="#{bundle.eliminaProdotto}"
+				update="@form" ajax="true"
+				/>
+		</f:facet>
+	</p:dataTable>
+
+</h:form>
+
+</html>

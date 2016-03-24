@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>#{bundle['label.title.application']}</title>
+		</f:facet>
+		
+		<link type="image/x-icon" rel="shortcut icon" href="#{request.contextPath}/icons/mdnv.ico" />
+
+		<link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />
+
+		<ui:insert name="head"></ui:insert>
+
+		<script type="text/javascript">
+			$(function() {
+				$('.sidebar a').hover(function() {
+					$(this).toggleClass('ui-state-hover');
+				})
+			});
+		</script>
+
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push([ '_setAccount', 'UA-12200033-3' ]);
+			_gaq.push([ '_trackPageview' ]);
+
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+						: 'http://www')
+						+ '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+
+		<script type="text/javascript">
+			PrimeFaces.locales['it'] = {
+				closeText : 'Chiudi',
+				prevText : 'Precedente',
+				nextText : 'Successivo',
+				currentText : 'Oggi',
+				monthNames : [ 'Gennaio', 'Febbraio', 'Marzo', 'Aprile',
+						'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre',
+						'Ottobre', 'Novembre', 'Dicembre' ],
+				monthNamesShort : [ 'Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu',
+						'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic' ],
+				dayNames : [ 'Domenica', 'Lunedi', 'Martedi', 'Mercoledi',
+						'Giovedi', 'Venerdi', 'Sabato' ],
+				dayNamesShort : [ 'Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven',
+						'Sab' ],
+				dayNamesMin : [ 'D', 'L', 'M', 'M ', 'G', 'V ', 'S' ],
+				weekHeader : 'Settimana',
+				FirstDay : 1,
+				isRTL : false,
+				showMonthAfterYear : false,
+				yearSuffix : '',
+				timeOnlyTitle : 'Solo Ora',
+				timeText : 'Ora',
+				hourText : 'Ore',
+				minuteText : 'Minuti',
+				secondText : 'Secondi',
+				ampm : false,
+				month : 'Mese',
+				week : 'Settimana',
+				day : 'Giorno',
+				allDayText : 'Tutto il giorno'
+			};
+		</script>
+		
+
+	</h:head>
+
+	<h:body style="background-color: #F8F8F8;">
+		<ui:include src="/WEB-INF/pftemplates/sessionTimeOut.xhtml" />
+		<div id="header" class="ui-widget ui-widget-header"
+			style="background-color: #F8F8F8;">
+			<ui:insert name="header">
+				<ui:include src="/WEB-INF/pftemplates/MdnvHeader.xhtml" />
+			</ui:insert>
+		</div>
+
+		<div id="page" class="ui-widget" style="background-color: #F8F8F8;">
+
+			<!-- SIDEBAR 
+				<div id="sidemenu">
+					<ui:insert name="menu" class="ui-widget ui-widget-header">
+						<ui:include src="/WEB-INF/pftemplates/MdnvMenu.xhtml" />
+					</ui:insert>
+				</div>
+				-->
+
+			<!-- CONTENT -->
+			<div id="content" style="margin-left: 10px">
+				<div class="ui-widget">
+					<ui:insert name="content">...</ui:insert>
+				</div>
+			</div>
+		</div>
+
+
+		<div id="footer">
+			<ui:insert name="footer">
+				<ui:include src="/WEB-INF/pftemplates/MdnvFooter.xhtml" />
+			</ui:insert>
+		</div>
+
+	</h:body>
+</f:view>
+</html>

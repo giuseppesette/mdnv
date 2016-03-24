@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<p:accordionPanel>
+	<p:tab title="Scheda Materiale">
+		<h:panelGrid columns="2" columnClasses="column customColumn" cellpadding="2">
+
+			<h:panelGrid columns="2" columnClasses="column customColumn" cellpadding="2">
+				<h:outputLabel for="descMateriale" value="Descrizione: " />
+				<p:inputTextarea id="descMateriale" rows="4" cols="30" />
+
+				<h:outputLabel for="materiale" value="Materiale: " />
+				<p:inputText value="" id="materiale" size="30" />
+
+				<h:outputLabel for="umMateriale" value="Unità di Misura: " />
+				<p:inputText value="" id="umMateriale" size="30" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="1" columnClasses="column customColumn" cellpadding="2">
+				<h:panelGrid columns="2" columnClasses="column customColumn" cellpadding="2">
+					<h:panelGrid columns="2" columnClasses="column customColumn" cellpadding="2">
+						<h:outputLabel for="imgMateriale" value="Immagine: " />
+						<p:graphicImage id="imgMateriale" 
+							name="../demo/images/godfather/godfather1.jpg"
+							width="250" height="80" style="vertical-align: top;"/>
+						<h:outputLabel for="download" value="Download: " />
+						<h:panelGrid columns="3" columnClasses="column customColumn" cellpadding="2">
+							<p:link id="download" 
+								outcome="/logout" value="PDF"
+								style="text-decoration: underline;">
+								<f:param name="pdfMateriale" value="10" />
+							</p:link>
+							<p:link outcome="/logout" value="DWG Libreria"
+								style="text-decoration: underline;">
+								<f:param name="dwgLibMateriale" value="10" />
+							</p:link>
+							<h:outputLabel id="blank1" value="" />
+							<p:link outcome="/logout" value="Scheda Tecnica"
+								style="text-decoration: underline;">
+								<f:param name="sctfMateriale" value="10" />
+							</p:link>
+							<p:link outcome="/logout" value="DWG Produzione"
+								style="text-decoration: underline;">
+								<f:param name="swgProdfMateriale" value="10" />
+							</p:link>
+							<h:outputLabel id="blank2" value="" />
+							<p:link outcome="/logout" value="3D"
+								style="text-decoration: underline;">
+								<f:param name="tredMateriale" value="10" />
+							</p:link>
+							<p:link outcome="/logout" value="2D"
+								style="text-decoration: underline;">
+								<f:param name="duedMateriale" value="10" />
+							</p:link>
+						</h:panelGrid>
+						<h:outputText value="   " />
+						<p:commandButton type="button" value="Upload File"
+							onclick="PF('fileUploadDialog').show()" icon="ui-icon-extlink" />
+					</h:panelGrid>
+					
+
+
+					<p:graphicImage name="../demo/images/vrml/plane.jpg"
+						alt="Image Description for VRML" title="VRML" />
+				</h:panelGrid>
+			</h:panelGrid>
+
+			<p:button value="Salva" icon="ui-icon-disk" />
+		</h:panelGrid>
+	</p:tab>
+	<p:tab title="Elenco Fornitori">
+		<ui:insert name="elencoFornitoriMateriali">
+			<ui:include src="/pages/3/elencoFornitori.xhtml" />
+		</ui:insert>
+	</p:tab>
+</p:accordionPanel>
+
+<p:separator />
+
+<p:dialog header="File Upload" widgetVar="fileUploadDialog" modal="true"
+	showEffect="blind" hideEffect="explode" resizable="true">
+	<p:outputPanel id="fileUploadDetail" style="text-align:center;">
+
+		<p:panelGrid columns="2" columnClasses="column" cellpadding="2">
+
+			<p:outputLabel for="selectTipiFile" value="Tipologia File: " />
+			<p:selectOneMenu id="selectTipiFile" style="width:150px"
+				onchange="selectTipiFileChangeHandler(this, 'uploadFilePnl', '#{requestScope.tipoFile.clientId}')">
+
+				<f:selectItem itemLabel="Seleziona..." itemValue="0" />
+				<f:selectItem itemLabel="File PDF" itemValue="PDF" />
+				<f:selectItem itemLabel="Scheda Tecnica" itemValue="DOC, EXCEL" />
+				<f:selectItem itemLabel="Immagine 2D" itemValue="2D" />
+				<f:selectItem itemLabel="VRML 3D" itemValue="VRML" />
+				<f:selectItem itemLabel="DWG Libreria" itemValue="DWG_Libreria" />
+				<f:selectItem itemLabel="DWG Produzione" itemValue="DWG_Produzione" />
+			</p:selectOneMenu>
+
+		</p:panelGrid>
+
+
+
+		<div id="uploadFilePnl" style="display: none">
+			<h:form enctype="multipart/form-data">
+				<p:panelGrid columns="1" columnClasses="column" cellpadding="2">
+					
+					<p:outputLabel id="tipoFile" 
+					binding="#{requestScope.tipoFile}" value="" />
+					
+					<p:fileUpload id="uploadFile"
+						style="font-weight:bold" value="" mode="simple"
+						disabled="false" />
+					
+					<p:commandButton 
+						id="uploadFileBtn" value="Submit" ajax="false"
+						actionListener="#{fileUploadView.upload}" disabled="false" />
+						
+				</p:panelGrid>
+			</h:form>
+			<p:growl id="messages" showDetail="true" />
+		</div>
+
+
+
+	</p:outputPanel>
+</p:dialog>
+
+<script type="text/javascript">
+
+function selectTipiFileChangeHandler(combo, uploadFilePnl, tipoFile) {
+
+	var panel = document.getElementById(uploadFilePnl);
+	var select = jQuery(combo);
+
+	if(select.val() != ''){
+		document.getElementById(tipoFile).innerHTML = "Scegliere un file: " + select.val();
+		if (panel.style.display == 'none') {
+			panel.style.display = 'block';
+		}
+	} else {
+		panel.style.display = 'none';
+	}
+	
+}
+
+
+</script>
+
+</html>

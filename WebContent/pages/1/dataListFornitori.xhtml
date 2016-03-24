@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form id="form">
+	<p:dataList value="#{fornitoriListView.frn3}" var="frn"
+		type="unordered" itemType="none" paginator="true" rows="10"
+		styleClass="paginated">
+		<f:facet name="header">
+					Lista Fornitori
+				</f:facet>
+		<p:commandLink update=":form:frnDetail"
+			oncomplete="PF('frnDialog').show()" title="Visualizza"
+			styleClass="ui-icon ui-icon-search"
+			style="float:left;margin-right:10px">
+			<f:setPropertyActionListener value="#{frn}"
+				target="#{fornitoriListView.selectedFornitore}" />
+			<h:outputText value="#{frn.brand}, #{frn.year}" />
+		</p:commandLink>
+		<h:outputText value="#{frn.brand}, #{frn.year}"
+			style="display:inline-block" />
+	</p:dataList>
+
+	<p:dialog header="Info Fornitore" widgetVar="frnDialog" modal="true"
+		showEffect="blind" hideEffect="explode" resizable="false">
+		<p:outputPanel id="frnDetail" style="text-align:center;">
+			<p:panelGrid columns="2"
+				rendered="#{not empty fornitoriListView.selectedFornitore}"
+				columnClasses="label,value">
+				<f:facet name="header">
+					<p:graphicImage
+						name="../demo/images/car/#{fornitoriListView.selectedFornitore.brand}-big.gif" />
+				</f:facet>
+
+				<h:outputText value="Brand:" />
+				<h:outputText value="#{fornitoriListView.selectedFornitore.brand}" />
+
+				<h:outputText value="Model:" />
+				<h:outputText value="#{fornitoriListView.selectedFornitore.model}" />
+
+				<h:outputText value="Year" />
+				<h:outputText value="#{fornitoriListView.selectedFornitore.year}" />
+
+				<h:outputText value="Color:" />
+				<h:outputText value="#{fornitoriListView.selectedFornitore.color}" />
+
+				<h:outputText value="Price" />
+				<h:outputText value="$#{fornitoriListView.selectedFornitore.price}" />
+			</p:panelGrid>
+		</p:outputPanel>
+	</p:dialog>
+</h:form>
+
+</html>

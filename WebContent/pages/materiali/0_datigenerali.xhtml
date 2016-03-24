@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+	<h:panelGrid columns="4" cellpadding="2" rendered="#{prodottibean.viewComboBoxes eq 'Y'}">
+		<p:outputLabel for="famiglia" value="#{bundle.famiglia}*: " />
+		<p:selectOneMenu id="famiglia" style="width:250px"
+			value="#{prodottibean.famiglia}"
+			onchange="famigliaChangeHandler(this)"
+			disabled="#{prodottibean.readonly}" >
+			
+			<p:ajax listener="#{prodottibean.onFamigliaChange}" update="@this" />
+
+			<f:selectItem itemLabel="#{bundle.seleziona}" itemValue="" noSelectionOption="true" />
+			<f:selectItems value="#{prodottibean.famiglie}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel for="tipologia" value="#{bundle.tipologia}*: " />
+		<p:selectOneMenu id="tipologia" style="width:250px"
+			value="#{prodottibean.tipologia}"
+			onchange="tipologiaChangeHandler(this)"
+			disabled="#{prodottibean.readonly}" >
+			
+			<p:ajax listener="#{prodottibean.onTipologiaChange}" update="@this" />
+			
+			<f:selectItem itemLabel="#{bundle.seleziona}" itemValue=""
+				noSelectionOption="true" />
+			<f:selectItems value="#{prodottibean.tipologie}" />
+		</p:selectOneMenu>
+	</h:panelGrid>
+	
+	<h:panelGrid columns="4" cellpadding="2" rendered="#{prodottibean.viewComboBoxes eq 'N'}">
+		<p:outputLabel for="txtFamiglia" value="#{bundle.famiglia}: " />
+		<p:inputText value="#{prodottibean.famiglia}" id="txtFamiglia" style="font-weight:bold" readonly="#{prodottibean.readonly}"/>
+
+		<p:outputLabel for="txtTipologia" value="#{bundle.tipologia}*: " />
+		<p:inputText value="#{prodottibean.tipologia}" id="txtTipologia" style="font-weight:bold" readonly="#{prodottibean.readonly}"/>
+	</h:panelGrid>
+	
+	<h:panelGrid columns="5" cellpadding="2">
+		<h:outputLabel for="nomeMateriale" value="#{bundle.nomeMateriale}*: " />
+		<p:autoComplete id="nomeMateriale" minQueryLength="3"
+			value="#{prodottibean.prod.prodotto}"
+			completeMethod="#{prodottibean.completeNomeProdotto}"
+			disabled="#{prodottibean.readonly}" 
+			effect="fade" size="40">
+			<p:ajax event="itemSelect" listener="#{prodottibean.popolaCodiceProdotto}" process="@form" update="@form"/> 
+			<p:ajax event="click" listener="#{prodottibean.clickCodiceProdotto}" process="@form" update="@form"/>
+   		</p:autoComplete>
+
+		<h:outputLabel for="codiceMateriale" value="#{bundle.codiceMateriale}: " />
+		<h:outputText id="lblCodiceMateriale" style="font-weight:bold" />
+
+		<p:inputText value="#{prodottibean.prod.codProdotto}" id="codiceMateriale" size="15" readonly="true" style="background-color: lightgrey;"/>
+		
+	</h:panelGrid>
+	
+	<h:panelGrid columns="2" cellpadding="2">
+		<p:commandButton id="btnSalva" icon="ui-icon-disk" update="@form"
+			
+			value="#{bundle.salva}"
+			action="#{prodottibean.saveProdotto}"
+			disabled="#{prodottibean.disable}" />
+
+		<p:commandButton id="btnAggiorna" icon="ui-icon-disk" update="@form"
+
+			value="#{bundle.aggiorna}"
+			action="#{prodottibean.updateProdotto}"
+			rendered="#{prodottibean.updateRendered}" />
+	</h:panelGrid>
+	
+</html>

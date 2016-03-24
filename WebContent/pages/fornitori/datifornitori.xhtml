@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:form id="form">
+
+	<!-- <script src="#{request.contextPath}/js/tagit/jquery.1.7.2.min.js" /> -->
+	<script src="#{request.contextPath}/js/tagit/jquery-ui.1.8.20.min.js"/>
+	<script src="#{request.contextPath}/js/tagit/tagit.js"/>
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/css/tagit/tagit-stylish-yellow.css"/>
+	
+	<script type="text/javascript">
+	$(function () {
+		/**
+	    //defining array
+	    var availableTags= [];
+		 //pushing data into array 
+		<c:forEach items="${fornitorebean.tagsList}" var="tags">
+			availableTags.push(["${tags.id}", "${tags.value}"]);
+		</c:forEach>
+		**/
+		//alert("availableTags: " + availableTags);
+		
+		$('#lavMateriali').tagit({
+			//tagSource: availableTags, 
+			sortable:true, 
+			triggerKeys:['enter', 'comma']//,
+			//tagsChanged:function (a, b) {
+			//	$('#demo4Out').html(a + ' was ' + b);
+			//} 
+		});
+		
+		$('#tagMateriali').tagit({
+			sortable:true, 
+			triggerKeys:['enter', 'comma']
+		});
+		
+		/**
+		$('#lavMateriali').tagit({
+			//tagSource:availableTags,
+			tagSource:function( request, response ) {
+				// http://www.experts-exchange.com/Programming/Languages/Scripting/JavaScript/Jquery/Q_28497117.html
+				$.ajax({
+					url: "http://gd.geobytes.com/AutoCompleteCity",
+					dataType: "jsonp",
+					data: {
+						q: request.term
+					},
+					success: function( data ) {
+						response( data );
+					}
+				});
+			},
+			sortable:true, 
+			triggerKeys:['enter', 'comma', 'tab']//,
+			//tagsChanged:function (a, b) {
+			//	$('#demo4Out').html(a + ' was ' + b);
+			//} 
+		});
+		**/
+	});
+	
+   function getHtml(action){
+       	var listTag = [];
+       	$( "#tagMateriali div" ).each(function( index, element ) {
+       		if ( $( this ).is( ".tagit-label" ) ) {
+       			listTag.push([$(this).text()]);
+       	    }
+       	});
+       	var listVal = [];
+       	$( "#lavMateriali div" ).each(function( index, element ) {
+       		if ( $( this ).is( ".tagit-label" ) ) {
+       			listVal.push([$(this).text()]);
+       	    }
+       	});
+       	if(action == 's')
+	  		commandSave([{name:'tagMateriali', value:listTag}, {name:'lavMateriali', value:listVal}]);
+       	else
+       		commandUpdate([{name:'tagMateriali', value:listTag}, {name:'lavMateriali', value:listVal}]);
+       	
+       	//return false;
+   } // END getHtml
+	
+	</script>
+
+	<p:messages id="msgs" autoUpdate="true" display="text" closable="true"/>
+
+	<h:panelGrid columns="4" columnClasses="column" cellpadding="5">
+
+		<h:outputLabel for="codFrn" value="#{bundle.codiceFornitore}: " />
+		<p:inputText value="#{fornitorebean.frn.codFornitore}" id="codFrn" readonly="true" size="12" disabled="#{fornitorebean.disable}"/>
+	    
+		<h:outputLabel for="data_inserimento" value="#{bundle.dataInserimento}: " />
+		<p:calendar id="data_inserimento" value="#{fornitorebean.frn.dataInserimento}" showOn="button"
+			locale="it" effect="explode" pattern="dd/MM/yyyy" disabled="#{fornitorebean.disable}"/>
+	    
+	</h:panelGrid>
+
+    <p:accordionPanel activeIndex="#{fornitorebean.activeIndex}">
+        <p:tab title="#{bundle.sedeLegale}" >
+		<!-- SEDE LEGALE FORNITORE -->
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+				<h:outputLabel for="ragSoc" value="#{bundle.ragioneSociale}: " />
+				<p:inputText value="#{fornitorebean.frn.ragioneSociale}" id="ragSoc" size="60" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+				<h:outputLabel for="tel1" value="#{bundle.telefono1}: " />
+				<p:inputText value="#{fornitorebean.frn.telefono1}" id="tel1" size="10" />
+			
+				<h:outputLabel for="address" value="#{bundle.indirizzo}: " />
+				<p:inputText value="#{fornitorebean.frn.indirizzo}" id="address" size="20" />
+			
+				<h:outputLabel for="tel2" value="#{bundle.telefono2}: " />
+				<p:inputText value="#{fornitorebean.frn.telefono2}" id="tel2" size="10" />
+			
+				<h:outputLabel for="comune" value="#{bundle.comune}: " />
+				<p:inputText value="#{fornitorebean.frn.comune}" id="comune" size="15" />
+			
+				<h:outputLabel for="cell" value="#{bundle.cellulare}: " />
+				<p:inputText value="#{fornitorebean.frn.cellulare}" id="cell" size="10" />
+			
+				<h:outputLabel for="cap" value="#{bundle.cap}: " />
+				<p:inputText value="#{fornitorebean.frn.cap}" id="cap" size="10" maxlength="10" />
+			
+				<h:outputLabel for="fax" value="#{bundle.fax}: " />
+				<p:inputText value="#{fornitorebean.frn.fax}" id="fax" size="10" />
+			
+				<h:outputLabel for="prov" value="#{bundle.provincia}: " />
+				<p:inputText value="#{fornitorebean.frn.prov}" id="prov" size="3"  maxlength="2"/>
+			
+				<h:outputLabel for="mail1" value="#{bundle.mail1}: " />
+				<p:inputText value="#{fornitorebean.frn.mail1}" id="mail1" size="20" />
+			
+				<h:outputLabel for="naz" value="#{bundle.nazione}: " />
+				<p:inputText value="#{fornitorebean.frn.nazione}" id="naz" size="10" />
+			
+				<h:outputLabel for="mail2" value="#{bundle.mail2}: " />
+				<p:inputText value="#{fornitorebean.frn.mail2}" id="mail2" size="20" />
+			
+				<h:outputLabel for="piva_vat" value="#{bundle.pivaVat}: " />
+				<p:inputText value="#{fornitorebean.frn.pivaVat}" id="piva_vat" size="15" />
+			
+				<h:outputLabel for="website" value="#{bundle.www}: " />
+				<p:inputText value="#{fornitorebean.frn.sito}" id="website" size="40" />
+			
+				<h:outputLabel for="codfisc" value="#{bundle.cf}: " />
+				<p:inputText value="#{fornitorebean.frn.cf}" id="codfisc" size="18" maxlength="16"/>
+			
+				<h:outputLabel for="codEan" value="#{bundle.codEan}: " />
+				<p:inputText value="#{fornitorebean.frn.codEan}" id="codEan" size="20" />
+	
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+				<h:outputLabel for="note" value="#{bundle.note}: " />
+				<p:inputTextarea id="note" rows="6" cols="50" maxlength="2000" value="#{fornitorebean.frn.note}"/>
+
+				<p:commandButton id="btnSalva"
+					value="#{bundle.salva}" action="#{fornitorebean.save}" icon="ui-icon-disk" update="@form"
+					disabled="#{fornitorebean.disable}"/>
+					
+				<p:commandButton id="btnAggiorna"
+					value="#{bundle.aggiorna}" action="#{fornitorebean.update}" icon="ui-icon-disk" update="@form"
+					rendered="#{fornitorebean.updateRendered}"/>
+			</h:panelGrid>	
+			
+        </p:tab>
+        <p:tab title="#{bundle.datiFatturazione}">
+			<p:tabView>
+        		<p:tab title="#{bundle.datiFatturazione}">
+					<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+						<h:outputLabel for="ragSocFatturazione" value="#{bundle.ragioneSociale}: " />
+						<p:inputText value="#{fornitorebean.datifatt.ragioneSociale}" id="ragSocFatturazione" size="60" />
+					</h:panelGrid>
+					<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+					
+						<h:outputLabel for="nomeFatt" value="#{bundle.nome}: " />
+						<p:inputText value="#{fornitorebean.datifatt.nome}" id="nomeFatt" size="20" />
+					
+						<h:outputLabel for="cognomeFatt" value="#{bundle.cognome}: " />
+						<p:inputText value="#{fornitorebean.datifatt.cognome}" id="cognomeFatt" size="20" />
+					
+						<h:outputLabel for="addressFatt" value="#{bundle.indirizzo}: " />
+						<p:inputText value="#{fornitorebean.datifatt.indirizzo}" id="addressFatt" size="20" />
+					
+						<h:outputLabel for="comuneFatt" value="#{bundle.comune}: " />
+						<p:inputText value="#{fornitorebean.datifatt.comune}" id="comuneFatt" size="20" />
+					
+						<h:outputLabel for="capFatt" value="#{bundle.cap}: " />
+						<p:inputText value="#{fornitorebean.datifatt.cap}" id="capFatt" size="10" maxlength="10" />
+					
+						<h:outputLabel for="provFatt" value="#{bundle.provincia}: " />
+						<p:inputText value="#{fornitorebean.datifatt.prov}" id="provFatt" size="4" maxlength="2" />
+					
+						<h:outputLabel for="nazFatt" value="#{bundle.nazione}: " />
+						<p:inputText value="#{fornitorebean.datifatt.nazione}" id="nazFatt" size="20" />
+					
+						<h:outputLabel for="piva_vatFatt" value="#{bundle.pivaVat}: " />
+						<p:inputText value="#{fornitorebean.datifatt.pivaVat}" id="piva_vatFatt" size="20" />
+					
+						<h:outputLabel for="ibanFatt" value="#{bundle.iban}: " />
+						<p:inputText value="#{fornitorebean.datifatt.iban}" id="ibanFatt" size="27" maxlength="27" />
+					
+						<h:outputLabel for="swiftFatt" value="#{bundle.swift}: " />
+						<p:inputText value="#{fornitorebean.datifatt.swift}" id="swiftFatt" size="20" />
+					
+						<h:outputLabel for="condPagFatt" value="#{bundle.condpag}: " />
+						<p:inputText value="#{fornitorebean.datifatt.condPag}" id="condPagFatt" size="20" />
+					
+						<h:outputLabel for="percFatt" value="#{bundle.percris}: " />
+						<p:inputText value="#{fornitorebean.datifatt.percRis}" id="percFatt" size="20" />
+					
+						<p:commandButton id="btnSalvaDatiFatturazione" value="#{bundle.salva}"
+							action="#{fornitorebean.saveDatiFatturazione}" icon="ui-icon-disk" 
+							update="@form"
+							disabled="#{fornitorebean.disableDatiFatt}"/>
+							
+						<p:commandButton id="btnAggiornaDatiFatt" value="#{bundle.aggiorna}" 
+							action="#{fornitorebean.updateDatiFatturazione}" icon="ui-icon-disk" 
+							update="@form"
+							rendered="#{fornitorebean.updateDatiFattRendered}"/>
+					</h:panelGrid>
+		        </p:tab>
+		        <p:tab title="#{bundle.listaFatture}">
+					<ui:insert name="datiFatturazione">
+						<ui:include src="/pages/0/listaFatture.xhtml" />
+					</ui:insert>
+				</p:tab>
+			 </p:tabView>
+        </p:tab>
+        <p:tab title="#{bundle.referenti}">
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+			    <p:tabView>
+			        <p:tab title="#{bundle.addReferente}">
+						<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+			
+							<h:outputLabel for="nomeRef" value="#{bundle.nome}: " />
+							<p:inputText value="#{fornitorebean.referente.nome}" id="nomeRef" size="20" />
+						
+							<h:outputLabel for="cognomeRef" value="#{bundle.cognome}: " />
+							<p:inputText value="#{fornitorebean.referente.cognome}" id="cognomeRef" size="20" />
+						
+							<h:outputLabel for="incaricoRef" value="#{bundle.incarico}: " />
+							<p:inputText value="#{fornitorebean.referente.incarico}" id="incaricoRef" size="20" />
+						
+							<h:outputLabel for="telRef" value="#{bundle.telefono}: " />
+							<p:inputText value="#{fornitorebean.referente.telefono}" id="telRef" size="10" />
+						
+							<h:outputLabel for="cellRef" value="#{bundle.cellulare}: " />
+							<p:inputText value="#{fornitorebean.referente.cellulare}" id="cellRef" size="10" />
+						
+							<h:outputLabel for="mailRef" value="#{bundle.mail}: " />
+							<p:inputText value="#{fornitorebean.referente.mail}" id="mailRef" size="30" />
+						
+							<p:commandButton id="btnSalvaReferente" value="#{bundle.salva}"
+								action="#{fornitorebean.saveReferente}" icon="ui-icon-disk" update="@form" process="@form"
+								disabled="#{fornitorebean.disableReferente}"/>
+								
+							<p:commandButton id="btnAggiornaDatiFatt" value="#{bundle.aggiorna}" 
+								action="#{fornitorebean.updateReferente}" icon="ui-icon-disk" update="@form" process="@form"
+								rendered="#{fornitorebean.updateReferenteRendered}"/>
+					
+			            </h:panelGrid>
+			        </p:tab>
+			        <p:tab title="#{bundle.listaReferenti}">
+			            <h:panelGrid columns="2" cellpadding="2">
+							<p:dataTable id="referentiDataList" var="ref" 
+								paginator="true" rows="5"
+								value="#{fornitorebean.referenteList}"
+								selectionMode="single" 
+								selection="#{fornitorebean.selectedReferente}"
+								rowKey="#{ref.id}">
+								
+								<p:ajax event="rowSelect" listener="#{fornitorebean.onRowReferenteSelect}"/>
+			
+								<p:column headerText="#{bundle.nomeCognome}">
+									<h:outputText value="#{ref.nome} #{ref.cognome}" />
+								</p:column>
+								<p:column headerText="#{bundle.incarico}">
+									<h:outputText value="#{ref.incarico}" />
+								</p:column>
+								<p:column headerText="#{bundle.telefono}">
+									<h:outputText value="#{ref.telefono}" />
+								</p:column>
+								<p:column headerText="#{bundle.cellulare}">
+									<h:outputText value="#{ref.cellulare}" />
+								</p:column>
+								<p:column headerText="#{bundle.mail}">
+									<h:outputText value="#{ref.mail}" />
+								</p:column>
+								<f:facet name="footer">
+									<p:commandButton process="referentiDataList" 
+										action="#{fornitorebean.editReferente}" 
+										icon="ui-icon-search" value="#{bundle.modifica}"
+										title="#{bundle.modificaReferente}"
+										update="@form" />
+								</f:facet>
+
+							</p:dataTable>
+			            </h:panelGrid>
+			        </p:tab>
+ 				</p:tabView>
+			</h:panelGrid>
+        </p:tab>
+ 
+        <p:tab title="#{bundle.materiali}">
+			<p:tabView>
+        		<p:tab title="#{bundle.tagMateriali}">
+        		
+					<h:outputLabel value="#{bundle.materiali}" />
+					<ul id="tagMateriali">
+					    <ui:repeat value="#{fornitorebean.tagsList}" var="tags">
+					        <li>${tags.value}</li>
+					    </ui:repeat>
+					</ul>
+					
+					<h:outputLabel value="#{bundle.lavorazioni}" />
+					<ul id="lavMateriali">
+						<c:forEach items="${fornitorebean.lavList}" var="lavs">
+							<li>${lavs.value}</li>
+						</c:forEach>
+					</ul>
+
+					<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+
+						
+						<h:outputLabel for="noteMateriali" value="#{bundle.note}: " />
+						<p:inputTextarea id="noteMateriali" rows="6" cols="50" value="#{fornitorebean.materiali.note}"/>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+						<p:commandButton id="btnSalvaTag" value="#{bundle.salva}"
+							icon="ui-icon-disk" 
+							ajax="false"
+							process="@form" update="@form" 
+							onclick="getHtml('s');"
+							action="#{fornitorebean.saveCommand}" 
+							disabled="#{fornitorebean.disableSaveMateriali}"/>
+							
+						<p:remoteCommand name="commandSave" actionListener="#{fornitorebean.saveTagMaterialiLavorazioni}"/>
+						
+						<p:commandButton id="btnAggiornaTag" value="#{bundle.aggiorna}"
+							icon="ui-icon-disk"
+							process="@form" 
+							onclick="getHtml('u');"
+							action="#{fornitorebean.updateCommand}" 
+							rendered="#{fornitorebean.updateMaterialiRendered}"/>
+							
+						<p:remoteCommand name="commandUpdate" actionListener="#{fornitorebean.updateTagMaterialiLavorazioni}"/>
+						
+					</h:panelGrid>
+					
+		        </p:tab>
+		        <p:tab title="#{bundle.listaMateriali}">
+					<ui:insert name="listaMateriali">
+						<ui:include src="/pages/0/listaMateriali.xhtml" />
+					</ui:insert>
+				</p:tab>
+			 </p:tabView>
+        </p:tab>
+
+        <!-- 
+        <p:tab title="Lavori">
+			<ui:insert name="lavoriFornitori">
+				<ui:include src="/pages/0/listaLavori.xhtml" />
+			</ui:insert>
+        </p:tab>
+         -->
+    </p:accordionPanel>
+    <p:separator />
+</h:form>
+
+</html>

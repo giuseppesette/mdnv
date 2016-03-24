@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+	<h:outputLabel for="ragSoc" value="#{bundle.ragioneSociale}: " />
+	<p:inputText value="#{clientebean.cli.ragione_sociale}" id="ragSoc" size="60" />
+</h:panelGrid>
+
+<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+	<h:outputLabel for="tel1" value="#{bundle.telefono1}: " />
+	<p:inputText value="#{clientebean.cli.telefono1}" id="tel1" size="12" />
+
+	<h:outputLabel for="address" value="#{bundle.indirizzo}: " />
+	<p:inputText value="#{clientebean.cli.indirizzo}" id="address" size="30" />
+
+	<h:outputLabel for="tel2" value="#{bundle.telefono2}: " />
+	<p:inputText value="#{clientebean.cli.telefono2}" id="tel2" size="12" />
+
+	<h:outputLabel for="comune" value="#{bundle.comune}: " />
+	<p:inputText value="#{clientebean.cli.comune}" id="comune" size="30" />
+
+	<h:outputLabel for="cell" value="#{bundle.cellulare}: " />
+	<p:inputText value="#{clientebean.cli.cellulare}" id="cell" size="12" />
+
+	<h:outputLabel for="cap" value="#{bundle.cap}: " />
+	<p:inputText value="#{clientebean.cli.cap}" id="cap" size="6" />
+
+	<h:outputLabel for="fax" value="#{bundle.fax}: " />
+	<p:inputText value="#{clientebean.cli.fax}" id="fax" size="12" />
+
+	<h:outputLabel for="prov" value="#{bundle.provincia}: " />
+	<p:inputText value="#{clientebean.cli.prov}" id="prov" size="3"  maxlength="2"/>
+
+	<h:outputLabel for="mail1" value="#{bundle.mail1}: " />
+	<p:inputText value="#{clientebean.cli.mail1}" id="mail1" size="40" />
+
+	<h:outputLabel for="naz" value="#{bundle.nazione}: " />
+	<p:inputText value="#{clientebean.cli.nazione}" id="naz" size="20" />
+
+	<h:outputLabel for="mail2" value="#{bundle.mail2}: " />
+	<p:inputText value="#{clientebean.cli.mail2}" id="mail2" size="40" />
+
+	<h:outputLabel for="piva_vat" value="#{bundle.pivaVat}: " />
+	<p:inputText value="#{clientebean.cli.piva_vat}" id="piva_vat" size="20" />
+
+	<h:outputLabel for="website" value="#{bundle.www}: " />
+	<p:inputText value="#{clientebean.cli.sito}" id="website" size="40" />
+
+	<h:outputLabel for="codfisc" value="#{bundle.cf}: " />
+	<p:inputText value="#{clientebean.cli.cf}" id="codfisc" size="20" />
+</h:panelGrid>
+
+
+
+
+</html>

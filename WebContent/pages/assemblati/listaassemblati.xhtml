@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<style>
+
+.myTable td {
+    font-size: 12px;
+}
+
+/* ID */
+.myTable td:nth-child(1) {
+    width: 10px;
+    font-weight: bold;
+}
+/* Nome Prodotto */
+.myTable td:nth-child(2) {
+    width: 260px;
+}
+/* Famiglia */
+.myTable td:nth-child(3) {
+    width: 240px;
+}
+/* Tipologia */
+.myTable td:nth-child(4) {
+    width: 140px;
+}
+/* Codice Prodotto */
+.myTable td:nth-child(5) {
+    width: 50px;
+}
+</style>
+	
+<h:form id="formDataTable">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<p:dataTable id="assemblatiDataList" var="assemblato" value="#{lassemblatibean.assemblatiLista}"
+		paginator="true" rows="15"
+		styleClass="myTable"
+		selectionMode="single" 
+		selection="#{lassemblatibean.selectedAssemblato}"
+		rowKey="#{assemblato.id}">
+		
+		<p:ajax event="rowSelect" listener="#{lassemblatibean.onRowAssemblatoSelect}" />
+		
+		<f:facet name="header">
+            #{bundle.listaAssemblati}
+        </f:facet>
+		<p:column headerText="#{bundle.id}">
+			<h:outputText value="#{assemblato.id}" />
+		</p:column>
+		<p:column headerText="#{bundle.nomeAssemblato}">
+			<h:outputText value="#{assemblato.assemblato}" />
+		</p:column>
+		<p:column headerText="#{bundle.famiglia}">
+			<h:outputText value="#{assemblato.famiglia.famiglia}" />
+		</p:column>
+		<p:column headerText="#{bundle.tipologia}">
+			<h:outputText value="#{assemblato.tipologie.tipologia}" />
+		</p:column>
+		<p:column headerText="#{bundle.codAssemblato}">
+			<h:outputText value="#{assemblato.codAssemblato}" />
+		</p:column>
+		<p:column headerText="#{bundle.descAssemblato}">
+			<h:outputText value="#{assemblato.descrizione}" />
+		</p:column>
+		<p:column headerText="#{bundle.lavorazione}">
+			<h:outputText value="#{assemblato.lavorazione}" />
+		</p:column>
+
+		<f:facet name="footer">
+			<p:commandButton process="assemblatiDataList" 
+				action="#{lassemblatibean.editAssemblato}" 
+				icon="ui-icon-pencil" value="#{bundle.modifica}"
+				title="#{bundle.modificaAssemblato}"/>
+				
+			<p:commandButton process="assemblatiDataList" 
+				action="#{lassemblatibean.cancellaProdotto}" 
+				icon="ui-icon-close" value="#{bundle.elimina}"
+				title="#{bundle.eliminaAssemblato}"
+				update="@form" ajax="true"
+				/>
+		</f:facet>
+	</p:dataTable>
+
+</h:form>
+
+</html>

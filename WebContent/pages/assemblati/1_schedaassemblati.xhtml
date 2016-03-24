@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:panelGrid columns="2" columnClasses="column customColumn"
+		cellpadding="2">
+
+		<h:panelGrid columns="2" columnClasses="column customColumn"
+			cellpadding="2">
+			<h:outputLabel for="descMateriale" value="#{bundle.descMateriale}: " />
+			<p:inputTextarea id="descMateriale" rows="4" cols="30"
+				value="#{prodassbean.asmbl.descrizione}" />
+
+			<h:outputLabel for="lavorazione" value="#{bundle.lavorazione}: " />
+			<p:inputText value="#{prodassbean.asmbl.lavorazione}" id="lavorazione" size="30"/>
+
+			<h:outputLabel for="umMateriale" value="#{bundle.unitaDiMisura}: " />
+			<p:inputText value="#{prodassbean.asmbl.um}" id="umMateriale" size="30" />
+		</h:panelGrid>
+
+		<h:panelGrid columns="1" columnClasses="column customColumn" cellpadding="2">
+			<h:panelGrid columns="2" columnClasses="column customColumn" cellpadding="2">
+				<h:panelGrid columns="2" columnClasses="column customColumn" cellpadding="2">
+					<h:outputLabel for="imgMateriale" value="Immagine: " />
+					<p:graphicImage id="imgMateriale"
+						value="#{FacesContext.getCurrentInstance().getExternalContext()}/images/wp.jpg" width="180"
+						height="80" style="vertical-align: top;" />
+					<h:outputLabel for="download" value="Download: " />
+					<h:panelGrid columns="3" columnClasses="column customColumn"
+						cellpadding="2">
+						<h:outputLabel for="PDF" value="PDF" />
+						<h:outputLabel for="DWG Libreria" value="DWG Libreria " />
+						<h:outputLabel for="Scheda Tecnica" value="Scheda Tecnica " />
+						<h:outputLabel for="DWG Produzione" value="DWG Produzione " />
+						<h:outputLabel for="3D" value="3D " />
+						<h:outputLabel for="2D" value="2D " />
+						<!-- 
+						<p:link id="download"  value="PDF"
+							style="text-decoration: underline;">
+							<f:param name="pdfMateriale" value="10" />
+						</p:link>
+						<p:link  value="DWG Libreria"
+							style="text-decoration: underline;">
+							<f:param name="dwgLibMateriale" value="10" />
+						</p:link>
+						<h:outputLabel id="blank1" value="" />
+						<p:link  value="Scheda Tecnica"
+							style="text-decoration: underline;">
+							<f:param name="sctfMateriale" value="10" />
+						</p:link>
+						<p:link value="DWG Produzione"
+							style="text-decoration: underline;">
+							<f:param name="swgProdfMateriale" value="10" />
+						</p:link>
+						<h:outputLabel id="blank2" value="" />
+						<p:link value="3D"
+							style="text-decoration: underline;">
+							<f:param name="tredMateriale" value="10" />
+						</p:link>
+						<p:link value="3D"
+							style="text-decoration: underline;">
+							<f:param name="duedMateriale" value="10" />
+						</p:link>
+						 -->
+					</h:panelGrid>
+
+				</h:panelGrid>
+
+				<p:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext()}/images/vrml.jpg"
+					alt="Image Description for VRML" title="VRML" />
+			</h:panelGrid>
+		</h:panelGrid>
+		<h:panelGrid columns="2" cellpadding="2">
+			<p:commandButton id="btnSalvaSchedaMateriale" icon="ui-icon-disk" update="@form"
+				
+				value="#{bundle.salva}"
+				action="#{prodassbean.saveSchedaMateriale}"
+				disabled="#{prodassbean.disableSaveSchedaMateriale}" />
+	
+			<p:commandButton id="btnAggiornaSchedaMateriale" icon="ui-icon-disk" update="@form"
+
+				value="#{bundle.aggiorna}"
+				action="#{prodassbean.updateSchedaMateriale}"
+				rendered="#{prodassbean.updateRenderedSchedaMateriale}" />
+		</h:panelGrid>
+	</h:panelGrid>
+</html>

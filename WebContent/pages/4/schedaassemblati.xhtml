@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="form">
+		<p:messages autoUpdate="true" />
+		<h:panelGrid columns="1" columnClasses="column" cellpadding="2">
+			<ui:include src="/pages/materiali/0_datigenerali.xhtml" />
+		</h:panelGrid>
+	
+		<p:accordionPanel>
+			<p:tab title="Scheda Assemblati">
+				<h:form id="formSchedaAss">
+					<h:panelGrid columns="2" columnClasses="column customColumn"
+						cellpadding="2">
+		
+						<h:panelGrid columns="2" columnClasses="column customColumn"
+							cellpadding="2">
+							<h:outputLabel for="descAssemblato" value="Descrizione: " />
+							<p:inputTextarea id="descAssemblato" rows="4" cols="30" />
+		
+							<h:outputLabel for="umAssemblato" value="Unità di Misura: " />
+							<p:inputText value="" id="umAssemblato" size="30" />
+		
+							<h:outputLabel for="lavAssemblato" value="Lavorazione: " />
+							<p:inputText value="" id="lavAssemblato" size="30" />
+						</h:panelGrid>
+		
+						<h:panelGrid columns="1" columnClasses="column customColumn"
+							cellpadding="2">
+							<h:panelGrid columns="2" columnClasses="column customColumn"
+								cellpadding="2">
+								<h:panelGrid columns="2" columnClasses="column customColumn"
+									cellpadding="2">
+									<h:outputLabel for="imgMateriale" value="Immagine: " />
+									<p:graphicImage id="imgMateriale"
+										name="../demo/images/godfather/godfather1.jpg" width="250"
+										height="80" style="vertical-align: top;" />
+									<h:outputLabel for="download" value="Download: " />
+									<h:panelGrid columns="3" columnClasses="column customColumn"
+										cellpadding="2">
+										<p:link id="download" outcome="/logout" value="PDF"
+											style="text-decoration: underline;">
+											<f:param name="pdfMateriale" value="10" />
+										</p:link>
+										<p:link outcome="/logout" value="DWG Libreria"
+											style="text-decoration: underline;">
+											<f:param name="dwgLibMateriale" value="10" />
+										</p:link>
+										<h:outputLabel id="blank1" value="" />
+										<p:link outcome="/logout" value="Scheda Tecnica"
+											style="text-decoration: underline;">
+											<f:param name="sctfMateriale" value="10" />
+										</p:link>
+									</h:panelGrid>
+								</h:panelGrid>
+		
+		
+		
+								<p:graphicImage name="../demo/images/vrml/plane.jpg"
+									alt="Image Description for VRML" title="VRML" />
+							</h:panelGrid>
+						</h:panelGrid>
+		
+						<p:button value="Salva" icon="ui-icon-disk" />
+					</h:panelGrid>
+				</h:form>
+			</p:tab>
+			<p:tab title="Elenco Materiali">
+		
+				<ui:insert name="elencoMaterialiAssemblati">
+					<ui:include src="/pages/4/elencoMaterialiAssemblati.xhtml" />
+				</ui:insert>
+		
+			</p:tab>
+			<p:tab title="Elenco Fornitori">
+				<ui:insert name="elencoFornitoriMateriali">
+					<ui:include src="/pages/3/elencoFornitori.xhtml" />
+				</ui:insert>
+			</p:tab>
+		</p:accordionPanel>
+	
+		<p:separator />
+	</h:form>
+</html>

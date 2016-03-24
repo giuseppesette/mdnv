@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:panelGrid columns="2" cellpadding="2">
+	<p:dataTable id="materialiDataList" var="mat"
+		value="#{materialiDTView.mat2}" selectionMode="single"
+		selection="#{materialiDTView.selectedMateriale}"
+		rowKey="#{mat.codProdotto}">
+
+		<p:column headerText="Codice Prodotto">
+			<h:outputText value="#{mat.codProdotto}" />
+		</p:column>
+		<p:column headerText="Prodotto">
+			<p:link value="#{mat.prodotto}" />
+		</p:column>
+		<p:column headerText="Cod Art Fornitore">
+			<h:outputText value="#{mat.codArtFornitore}" />
+		</p:column>
+		<p:column headerText="Materiale">
+			<h:outputText value="#{mat.materiale}" />
+		</p:column>
+		<p:column headerText="Lavorazione">
+			<h:outputText value="#{mat.lavorazione}" />
+		</p:column>
+		<p:column headerText="Costo Unitario">
+			<h:outputText value="#{mat.costoUnitario}" />
+		</p:column>
+		<p:column headerText="Qta Min Ord">
+			<h:outputText value="#{mat.qtaMinOrd}" />
+		</p:column>
+	</p:dataTable>
+</h:panelGrid>
+
+</html>

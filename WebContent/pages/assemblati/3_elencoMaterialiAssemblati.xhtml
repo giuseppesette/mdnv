@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<style>
+
+.trashLink{
+	width: 16px;
+	height: 16px;
+	background-image: url('../icons/delete.png');
+	background-repeat: no-repeat;
+	display: block;
+	overflow: hidden;
+	text-indent: -99999px;
+}
+
+.myTable td {
+    font-size: 12px;
+}
+
+/* ID */
+.myTable td:nth-child(1) {
+    width: 10px;
+    font-weight: bold;
+}
+/* Materiale */
+.myTable td:nth-child(2) {
+    width: 260px;
+}
+/* Quantità */
+.myTable td:nth-child(3) {
+    width: 240px;
+}
+/* Azioni */
+.myTable td:nth-child(4) {
+    width: 40px;
+    
+}
+</style>
+
+
+    <p:panel header="Inserisci un Materiale" style="margin-bottom:20px">
+        <h:panelGrid columns="6" cellpadding="5">
+            <h:outputLabel value="Materiale: " for="txtMateriale:" />
+            <p:inputText id="txtMateriale" value="#{prodassbean.materiale.prodotto}" />
+ 
+            <h:outputLabel value="Quantità: " for="txtQuantita" />
+            <p:inputText id="txtQuantita" value="#{prodassbean.materiale.quantita}" size="4" />
+ 
+            <p:commandButton id="btn_reset" value="Reset" type="reset" />
+            <p:commandButton id="btn_add" value="Aggiungi" update="@form" action="#{prodassbean.createNew}" >
+                <p:collector value="#{prodassbean.materiale}" addTo="#{prodassbean.materiali}" unique="true"/>
+            </p:commandButton>
+        </h:panelGrid>
+    </p:panel>
+ 
+    <p:outputPanel id="listaMateriali">
+        <p:dataTable value="#{prodassbean.materiali}" styleClass="myTable" var="materiale" id="materialiTable">
+
+            <p:column headerText="ID">
+                <h:outputText value="" />
+            </p:column>
+ 
+            <p:column headerText="Materiale">
+                <h:outputText value="#{materiale.prodotto}" />
+            </p:column>
+ 
+            <p:column headerText="Quantità">
+                <f:facet name="header">
+                    <h:outputText value="Quantità" />
+                </f:facet>
+                <h:outputText value="#{materiale.quantita}" />
+            </p:column>
+ 
+            <p:column headerText="Azione">
+            	<!-- p:commandButton icon="ui-icon-trash" title="Elimina Materiale"/ -->
+            	<!-- p:commandLink value="Rimuovi" update="@form" process="@form" styleClass="trashLink" -->
+                <p:commandLink value="..:: Rimuovi ::.." update="@form" process="@form">
+                    <p:collector value="#{materiale}" removeFrom="#{prodassbean.materiali}" unique="true"/>
+                </p:commandLink>
+            </p:column>
+ 
+        </p:dataTable>
+    </p:outputPanel>
+
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form id="form">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<p:separator />
+
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+		<h:outputLabel for="ragSoc" value="#{bundle.ragioneSocialeNomeCognome}: " />
+		<p:inputText value="#{contattibean.contatti.ragioneSociale}" id="ragSoc" size="60" />
+	</h:panelGrid>
+	
+	<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+		<h:outputLabel for="tel1" value="#{bundle.telefono1}: " />
+		<p:inputText value="#{contattibean.contatti.telefono1}" id="tel1" size="10" />
+	
+		<h:outputLabel for="address" value="#{bundle.indirizzo}: " />
+		<p:inputText value="#{contattibean.contatti.indirizzo}" id="address" size="40" />
+	
+		<h:outputLabel for="tel2" value="#{bundle.telefono2}: " />
+		<p:inputText value="#{contattibean.contatti.telefono2}" id="tel2" size="10" />
+	
+		<h:outputLabel for="comune" value="#{bundle.comune}: " />
+		<p:inputText value="#{contattibean.contatti.comune}" id="comune" size="20" />
+	
+		<h:outputLabel for="cell" value="#{bundle.cellulare}: " />
+		<p:inputText value="#{contattibean.contatti.cellulare}" id="cell" size="10" />
+	
+		<h:outputLabel for="cap" value="#{bundle.cap}: " />
+		<p:inputText value="#{contattibean.contatti.cap}" id="cap" size="10" maxlength="10" />
+	
+		<h:outputLabel for="fax" value="#{bundle.fax}: " />
+		<p:inputText value="#{contattibean.contatti.fax}" id="fax" size="10" />
+	
+		<h:outputLabel for="prov" value="#{bundle.provincia}: " />
+		<p:inputText value="#{contattibean.contatti.prov}" id="prov" size="2"  maxlength="2"/>
+	
+		<h:outputLabel for="mail1" value="#{bundle.mail1}: " />
+		<p:inputText value="#{contattibean.contatti.mail1}" id="mail1" size="30" />
+	
+		<h:outputLabel for="naz" value="#{bundle.nazione}: " />
+		<p:inputText value="#{contattibean.contatti.nazione}" id="naz" size="20" />
+	
+		<h:outputLabel for="mail2" value="#{bundle.mail2}: " />
+		<p:inputText value="#{contattibean.contatti.mail2}" id="mail2" size="30" />
+	
+		<h:outputLabel for="piva_vat" value="#{bundle.pivaVat}: " />
+		<p:inputText value="#{contattibean.contatti.pivaVat}" id="piva_vat" size="18" />
+	
+		<h:outputLabel for="website" value="#{bundle.www}: " />
+		<p:inputText value="#{contattibean.contatti.sito}" id="website" size="40" />
+	
+		<h:outputLabel for="codfisc" value="#{bundle.cf}: " />
+		<p:inputText value="#{contattibean.contatti.cf}" id="codfisc" size="18" />
+	
+	</h:panelGrid>
+	
+	<p:separator />
+
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+
+		<p:commandButton id="btnSalva"
+			value="#{bundle.salva}" action="#{contattibean.save}" icon="ui-icon-disk" update="@form"
+			disabled="#{contattibean.disable}"/>
+			
+		<p:commandButton id="btnAggiorna"
+			value="#{bundle.aggiorna}" action="#{contattibean.update}" icon="ui-icon-disk" update="@form"
+			rendered="#{contattibean.updateRendered}"/>
+			
+				
+	</h:panelGrid>
+
+	<p:separator />
+
+</h:form>
+</html>

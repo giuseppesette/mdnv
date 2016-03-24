@@ -1,0 +1,181 @@
+package it.mdnv.entities;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the assemblati database table.
+ * 
+ */
+@Entity
+public class Assemblati implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private int id;
+
+	private String assemblato;
+
+	private String codAssemblato;
+
+	private String descrizione;
+
+	private String dwnDWGLibreria;
+
+	private String dwnDWGProduzione;
+
+	private String dwnl2d;
+
+	private String dwnl3d;
+
+	private String dwnlPdf;
+
+	private String dwnlSchedaTecnica;
+
+	@Column(name="id_famiglia")
+	private int idFamiglia;
+
+	@Column(name="id_tipologia")
+	private int idTipologia;
+
+	private String lavorazione;
+
+	private String pathImmagine;
+
+	private String pathVrml;
+
+	private String um;
+
+	public Assemblati() {
+	}
+
+	public int getId() {
+		return this.id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getAssemblato() {
+		return this.assemblato;
+	}
+
+	public void setAssemblato(String assemblato) {
+		this.assemblato = assemblato;
+	}
+
+	public String getCodAssemblato() {
+		return this.codAssemblato;
+	}
+
+	public void setCodAssemblato(String codAssemblato) {
+		this.codAssemblato = codAssemblato;
+	}
+
+	public String getDescrizione() {
+		return this.descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public String getDwnDWGLibreria() {
+		return this.dwnDWGLibreria;
+	}
+
+	public void setDwnDWGLibreria(String dwnDWGLibreria) {
+		this.dwnDWGLibreria = dwnDWGLibreria;
+	}
+
+	public String getDwnDWGProduzione() {
+		return this.dwnDWGProduzione;
+	}
+
+	public void setDwnDWGProduzione(String dwnDWGProduzione) {
+		this.dwnDWGProduzione = dwnDWGProduzione;
+	}
+
+	public String getDwnl2d() {
+		return this.dwnl2d;
+	}
+
+	public void setDwnl2d(String dwnl2d) {
+		this.dwnl2d = dwnl2d;
+	}
+
+	public String getDwnl3d() {
+		return this.dwnl3d;
+	}
+
+	public void setDwnl3d(String dwnl3d) {
+		this.dwnl3d = dwnl3d;
+	}
+
+	public String getDwnlPdf() {
+		return this.dwnlPdf;
+	}
+
+	public void setDwnlPdf(String dwnlPdf) {
+		this.dwnlPdf = dwnlPdf;
+	}
+
+	public String getDwnlSchedaTecnica() {
+		return this.dwnlSchedaTecnica;
+	}
+
+	public void setDwnlSchedaTecnica(String dwnlSchedaTecnica) {
+		this.dwnlSchedaTecnica = dwnlSchedaTecnica;
+	}
+
+	public int getIdFamiglia() {
+		return this.idFamiglia;
+	}
+
+	public void setIdFamiglia(int idFamiglia) {
+		this.idFamiglia = idFamiglia;
+	}
+
+	public int getIdTipologia() {
+		return this.idTipologia;
+	}
+
+	public void setIdTipologia(int idTipologia) {
+		this.idTipologia = idTipologia;
+	}
+
+	public String getLavorazione() {
+		return this.lavorazione;
+	}
+
+	public void setLavorazione(String lavorazione) {
+		this.lavorazione = lavorazione;
+	}
+
+	public String getPathImmagine() {
+		return this.pathImmagine;
+	}
+
+	public void setPathImmagine(String pathImmagine) {
+		this.pathImmagine = pathImmagine;
+	}
+
+	public String getPathVrml() {
+		return this.pathVrml;
+	}
+
+	public void setPathVrml(String pathVrml) {
+		this.pathVrml = pathVrml;
+	}
+
+	public String getUm() {
+		return this.um;
+	}
+
+	public void setUm(String um) {
+		this.um = um;
+	}
+
+}

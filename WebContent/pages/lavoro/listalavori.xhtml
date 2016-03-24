@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:form id="formDataTable">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<p:dataTable id="lavoriDataList" var="lavoro" value="#{llavorobean.lavoriLista}"
+		paginator="true" rows="10"
+		selectionMode="single" 
+		selection="#{llavorobean.selectedLavoro}"
+		rowKey="#{lavoro.id}">
+		
+		<p:ajax event="rowSelect" listener="#{llavorobean.onRowLavoroSelect}" />
+		
+		<f:facet name="header">
+            #{bundle.listaLavori}
+        </f:facet>
+		<p:column headerText="#{bundle.nomeLavoro}">
+			<h:outputText value="#{lavoro.nomeLavoro}" />
+		</p:column>
+		<p:column headerText="#{bundle.statoLavoro}">
+			<h:outputText value="#{cliente.stato}" />
+		</p:column>
+		<f:facet name="footer">
+			<p:commandButton process="lavoriDataList" 
+				action="#{llavorobean.editLavoro}" 
+				icon="ui-icon-pencil" value="#{bundle.modifica}"
+				title="#{bundle.modificaLavoro}"/>
+				
+			<p:commandButton process="lavoriDataList" 
+				action="#{llavorobean.cancellaLavoro}" 
+				icon="ui-icon-close" value="#{bundle.elimina}"
+				title="#{bundle.eliminaLavoro}"
+				update="@form" ajax="true"
+				/>
+		</f:facet>
+	</p:dataTable>
+
+</h:form>
+
+</html>

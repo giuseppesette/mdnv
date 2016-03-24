@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<lavoro radice="smb://192.168.200.7/sp_1/dati/MODONOVO/5_LAVORI/" username="modonovoserver" password="modonovo2014">
+	<dir id="1_DOCIN"/>
+	<dir id="2_DOCOUT"/>
+	<dir id="3_MAIL"/>
+	<dir id="4_DOCUMENTI PROGETTO">
+		<subdir id="4_1_ELABORATI" />
+		<subdir id="4_2_FOTO E RENDER"/>
+		<subdir id="4_3_COMPUTO"/>
+	</dir>
+	<dir id="5_GESTIONE CLIENTE">
+		<subdir id="5_1_OFFERTA"/>
+		<subdir id="5_2_CONTRATTO"/>
+		<subdir id="5_3_CERTIFICATI"/>
+		<subdir id="5_4_NONCONFORMITA"/>
+	</dir>
+	<dir id="6_DOCUMENTI CANTIERE"/>
+	<dir id="7_PRODUZIONE">
+		<subdir id="7_1_ESECUTIVI DI PRODUZIONE"/>
+		<subdir id="7_2_ORELAVORAZIONI"/>
+	</dir>
+	<dir id="8_OBSOLETI"/>
+</lavoro>

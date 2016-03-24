@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form id="form">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<h:panelGrid columns="4" columnClasses="column" cellpadding="5">
+		<h:outputLabel for="codCli" value="#{bundle.codiceCliente}: " />
+		<p:inputText value="#{clientebean.cli.codCliente}" id="codCli" readonly="true" size="10" disabled="#{clientebean.disable}"/>
+
+		<p:rating value="#{clientebean.cli.rating}" />
+
+	</h:panelGrid>
+ 
+ 	<h:panelGrid columns="4" columnClasses="column" cellpadding="5">
+
+		<h:outputLabel for="canaleCli" value="#{bundle.canale}: " />
+		<p:inputText value="#{clientebean.cli.canale}" id="canaleCli" size="30" />
+
+		<h:outputLabel for="data_inserimento" value="#{bundle.dataInserimento}: " />
+		<p:calendar id="data_inserimento" value="#{clientebean.cli.dataInserimento}" showOn="button"
+			locale="it" effect="explode" pattern="dd/MM/yyyy" disabled="#{clientebean.disable}"/>
+		
+	</h:panelGrid>
+ 
+	<p:accordionPanel activeIndex="#{clientebean.activeIndex}">
+		<p:tab title="#{bundle.sedeLegale}" >
+
+		<!-- SEDE LEGALE CLIENTE -->
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+				<h:outputLabel for="ragSoc" value="#{bundle.ragioneSociale}: " />
+				<p:inputText value="#{clientebean.cli.ragioneSociale}" id="ragSoc" size="60" />
+			</h:panelGrid>
+			
+			<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+				<h:outputLabel for="tel1" value="#{bundle.telefono1}: " />
+				<p:inputText value="#{clientebean.cli.telefono1}" id="tel1" size="10" />
+			
+				<h:outputLabel for="address" value="#{bundle.indirizzo}: " />
+				<p:inputText value="#{clientebean.cli.indirizzo}" id="address" size="20" />
+			
+				<h:outputLabel for="tel2" value="#{bundle.telefono2}: " />
+				<p:inputText value="#{clientebean.cli.telefono2}" id="tel2" size="10" />
+			
+				<h:outputLabel for="comune" value="#{bundle.comune}: " />
+				<p:inputText value="#{clientebean.cli.comune}" id="comune" size="15" />
+			
+				<h:outputLabel for="cell" value="#{bundle.cellulare}: " />
+				<p:inputText value="#{clientebean.cli.cellulare}" id="cell" size="10" />
+			
+				<h:outputLabel for="cap" value="#{bundle.cap}: " />
+				<p:inputText value="#{clientebean.cli.cap}" id="cap" size="10" maxlength="10" />
+			
+				<h:outputLabel for="fax" value="#{bundle.fax}: " />
+				<p:inputText value="#{clientebean.cli.fax}" id="fax" size="10" />
+			
+				<h:outputLabel for="prov" value="#{bundle.provincia}: " />
+				<p:inputText value="#{clientebean.cli.prov}" id="prov" size="3"  maxlength="2"/>
+			
+				<h:outputLabel for="mail1" value="#{bundle.mail1}: " />
+				<p:inputText value="#{clientebean.cli.mail1}" id="mail1" size="20" />
+			
+				<h:outputLabel for="naz" value="#{bundle.nazione}: " />
+				<p:inputText value="#{clientebean.cli.nazione}" id="naz" size="10" />
+			
+				<h:outputLabel for="mail2" value="#{bundle.mail2}: " />
+				<p:inputText value="#{clientebean.cli.mail2}" id="mail2" size="20" />
+			
+				<h:outputLabel for="piva_vat" value="#{bundle.pivaVat}: " />
+				<p:inputText value="#{clientebean.cli.pivaVat}" id="piva_vat" size="15" />
+			
+				<h:outputLabel for="website" value="#{bundle.www}: " />
+				<p:inputText value="#{clientebean.cli.sito}" id="website" size="40" />
+			
+				<h:outputLabel for="codfisc" value="#{bundle.cf}: " />
+				<p:inputText value="#{clientebean.cli.cf}" id="codfisc" size="18" />
+			
+			</h:panelGrid>
+
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+				<h:outputLabel for="note" value="#{bundle.note}: " />
+				<p:inputTextarea id="note" rows="6" cols="50" maxlength="2000" value="#{clientebean.cli.note}"/>
+
+				<p:commandButton id="btnSalva"
+					value="#{bundle.salva}" action="#{clientebean.save}" icon="ui-icon-disk" update="@form"
+					disabled="#{clientebean.disable}"/>
+					
+				<p:commandButton id="btnAggiorna"
+					value="#{bundle.aggiorna}" action="#{clientebean.update}" icon="ui-icon-disk" update="@form"
+					rendered="#{clientebean.updateRendered}"/>
+					
+						
+			</h:panelGrid>
+		</p:tab>
+
+		<p:tab title="#{bundle.sedeOperativa}">
+			<!-- SEDE OPERATIVA -->
+			
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+			
+				<p:tabView id="sedeOpTabView">
+					
+					
+					<p:tab id="addSedeOpTab" title="#{bundle.addSedeOperativa}">
+						<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+							<h:outputLabel for="ragSocSedeOp" value="#{bundle.ragioneSociale}: " />
+							<p:inputText value="#{clientebean.sedeop.ragioneSociale}"
+								id="ragSocSedeOp" size="60" maxlength="255" />
+						</h:panelGrid>
+			
+						<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+			
+							<h:outputLabel for="nomeSedeOp" value="#{bundle.nome}: " />
+							<p:inputText value="#{clientebean.sedeop.nome}" id="nomeSedeOp"
+								size="20" maxlength="255" />
+			
+							<h:outputLabel for="cognomeSedeOp" value="#{bundle.cognome}: " />
+							<p:inputText value="#{clientebean.sedeop.cognome}" id="cognomeSedeOp"
+								size="20" maxlength="255" />
+			
+							<h:outputLabel for="addressSedeOp" value="#{bundle.indirizzo}: " />
+							<p:inputText value="#{clientebean.sedeop.indirizzo}"
+								id="addressSedeOp" size="20" maxlength="255" />
+			
+							<h:outputLabel for="comuneSedeOp" value="#{bundle.comune}: " />
+							<p:inputText value="#{clientebean.sedeop.comune}" id="comuneSedeOp"
+								size="20" maxlength="255" />
+			
+							<h:outputLabel for="capSedeOp" value="#{bundle.cap}: " />
+							<p:inputText value="#{clientebean.sedeop.cap}" id="capSedeOp"
+								size="10" maxlength="10" />
+			
+							<h:outputLabel for="provSedeOp" value="#{bundle.provincia}: " />
+							<p:inputText value="#{clientebean.sedeop.prov}" id="provSedeOp"
+								 size="4" maxlength="2"  />
+			
+							<h:outputLabel for="nazSedeOp" value="#{bundle.nazione}: " />
+							<p:inputText value="#{clientebean.sedeop.nazione}" id="nazSedeOp"
+								size="20" maxlength="255" />
+			
+			
+						</h:panelGrid>
+			
+						<p:commandButton id="btnSalvaSedeOperativa" value="#{bundle.salva}"
+							action="#{clientebean.saveSedeOperativa}" icon="ui-icon-disk"  update="@form" process="@form"
+							disabled="#{clientebean.disableSo}"/>
+			
+						<p:commandButton id="btnAggiornaSedeOperativa" value="#{bundle.aggiorna}" 
+							action="#{clientebean.updateSedeOperativa}" icon="ui-icon-disk" update="@form" process="@form"
+							rendered="#{clientebean.updateSoRendered}"/>
+			
+					</p:tab>
+					<p:tab id="listSedeOpTab" title="#{bundle.listaSediOperative}">
+ 
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:dataTable id="sediOperativeDataList" var="sedeOp"
+								paginator="true" rows="5"
+								value="#{clientebean.sd}" 
+								selectionMode="single"
+								selection="#{clientebean.selectedSedeOperativa}"
+								rowKey="#{sedeOp.id}">
+			                    
+       							<p:ajax event="rowSelect" listener="#{clientebean.onRowSedeOperativaSelect}" />
+        	                    <p:ajax event="rowUnselect"/>
+        	                    
+								<p:column headerText="#{bundle.ragioneSociale}" >
+									<h:outputText value="#{sedeOp.ragioneSociale}" id="r" />
+									<p:tooltip id="toolTipTrack" for="r" value="Per deselezionare una riga: Ctrl+mouse click" trackMouse="true" />									
+								</p:column>
+
+								<p:column headerText="#{bundle.indirizzo}">
+									<h:outputText value="#{sedeOp.indirizzo}" />
+								</p:column>
+								<p:column headerText="#{bundle.comune}">
+									<h:outputText value="#{sedeOp.comune}" />
+								</p:column>
+								<p:column headerText="#{bundle.cap}">
+									<h:outputText value="#{sedeOp.cap}" />
+								</p:column>
+								<p:column headerText="#{bundle.provincia}">
+									<h:outputText value="#{sedeOp.prov}" />
+								</p:column>
+
+								<f:facet name="footer">
+									<p:commandButton process="sediOperativeDataList" 
+										action="#{clientebean.editSedeOperativa}" 
+										icon="ui-icon-search" value="#{bundle.modifica}"
+										title="#{bundle.modificaSedeOperativa}"
+										update="@form" 
+										  />
+								</f:facet>
+
+							</p:dataTable>
+						</h:panelGrid>
+					</p:tab>
+				</p:tabView>
+			
+			</h:panelGrid>
+
+		</p:tab>
+
+		<p:tab title="#{bundle.datiFatturazione}">
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+				<h:outputLabel for="ragSocFatturazione" value="#{bundle.ragioneSociale}: " />
+				<p:inputText value="#{clientebean.datifatt.ragioneSociale}" id="ragSocFatturazione" size="60" />
+			</h:panelGrid>
+			<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+			
+				<h:outputLabel for="nomeFatt" value="#{bundle.nome}: " />
+				<p:inputText value="#{clientebean.datifatt.nome}" id="nomeFatt" size="20" />
+			
+				<h:outputLabel for="cognomeFatt" value="#{bundle.cognome}: " />
+				<p:inputText value="#{clientebean.datifatt.cognome}" id="cognomeFatt" size="20" />
+			
+				<h:outputLabel for="addressFatt" value="#{bundle.indirizzo}: " />
+				<p:inputText value="#{clientebean.datifatt.indirizzo}" id="addressFatt" size="20" />
+			
+				<h:outputLabel for="comuneFatt" value="#{bundle.comune}: " />
+				<p:inputText value="#{clientebean.datifatt.comune}" id="comuneFatt" size="20" />
+			
+				<h:outputLabel for="capFatt" value="#{bundle.cap}: " />
+				<p:inputText value="#{clientebean.datifatt.cap}" id="capFatt" size="10" maxlength="10" />
+			
+				<h:outputLabel for="provFatt" value="#{bundle.provincia}: " />
+				<p:inputText value="#{clientebean.datifatt.prov}" id="provFatt" size="4" maxlength="2" />
+			
+				<h:outputLabel for="nazFatt" value="#{bundle.nazione}: " />
+				<p:inputText value="#{clientebean.datifatt.nazione}" id="nazFatt" size="20" />
+			
+				<h:outputLabel for="piva_vatFatt" value="#{bundle.pivaVat}: " />
+				<p:inputText value="#{clientebean.datifatt.pivaVat}" id="piva_vatFatt" size="20" />
+			
+				<h:outputLabel for="ibanFatt" value="#{bundle.iban}: " />
+				<p:inputText value="#{clientebean.datifatt.iban}" id="ibanFatt" size="27" maxlength="27" />
+			
+				<h:outputLabel for="swiftFatt" value="#{bundle.swift}: " />
+				<p:inputText value="#{clientebean.datifatt.swift}" id="swiftFatt" size="20" />
+			
+				<h:outputLabel for="condPagFatt" value="#{bundle.condpag}: " />
+				<p:inputText value="#{clientebean.datifatt.condPag}" id="condPagFatt" size="20" />
+			
+				<h:outputLabel for="percFatt" value="#{bundle.percris}: " />
+				<p:inputText value="#{clientebean.datifatt.percRis}" id="percFatt" size="20" />
+			
+				<p:commandButton id="btnSalvaDatiFatturazione" value="#{bundle.salva}"
+					action="#{clientebean.saveDatiFatturazione}" icon="ui-icon-disk" 
+					disabled="#{clientebean.disableDatiFatt}"/>
+					
+				<p:commandButton id="btnAggiornaDatiFatt"
+					value="#{bundle.aggiorna}" action="#{clientebean.updateDatiFatturazione}" icon="ui-icon-disk" update="@form"
+					rendered="#{clientebean.updateDatiFattRendered}"/>
+			</h:panelGrid>
+
+		</p:tab>
+
+		<p:tab title="#{bundle.referenti}">
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+			    <p:tabView>
+			        <p:tab title="#{bundle.addReferente}">
+						<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+			
+							<h:outputLabel for="nomeRef" value="#{bundle.nome}: " />
+							<p:inputText value="#{clientebean.referente.nome}" id="nomeRef" size="20" />
+						
+							<h:outputLabel for="cognomeRef" value="#{bundle.cognome}: " />
+							<p:inputText value="#{clientebean.referente.cognome}" id="cognomeRef" size="20" />
+						
+							<h:outputLabel for="incaricoRef" value="#{bundle.incarico}: " />
+							<p:inputText value="#{clientebean.referente.incarico}" id="incaricoRef" size="20" />
+						
+							<h:outputLabel for="telRef" value="#{bundle.telefono}: " />
+							<p:inputText value="#{clientebean.referente.telefono}" id="telRef" size="10" />
+						
+							<h:outputLabel for="cellRef" value="#{bundle.cellulare}: " />
+							<p:inputText value="#{clientebean.referente.cellulare}" id="cellRef" size="10" />
+						
+							<h:outputLabel for="mailRef" value="#{bundle.mail}: " />
+							<p:inputText value="#{clientebean.referente.mail}" id="mailRef" size="30" />
+						
+							<p:commandButton id="btnSalvaReferente" value="#{bundle.salva}"
+								action="#{clientebean.saveReferente}" icon="ui-icon-disk" update="@form" process="@form"
+								disabled="#{clientebean.disableReferente}"/>
+								
+							<p:commandButton id="btnAggiornaDatiFatt" value="#{bundle.aggiorna}" 
+								action="#{clientebean.updateReferente}" icon="ui-icon-disk" update="@form" process="@form"
+								rendered="#{clientebean.updateReferenteRendered}"/>
+					
+			            </h:panelGrid>
+			        </p:tab>
+			        <p:tab title="#{bundle.listaReferenti}">
+			            <h:panelGrid columns="2" cellpadding="2">
+							<p:dataTable id="referentiDataList" var="ref" 
+								paginator="true" rows="5"
+								value="#{clientebean.referenteList}"
+								selectionMode="single" 
+								selection="#{clientebean.selectedReferente}"
+								rowKey="#{ref.id}">
+								
+								<p:ajax event="rowSelect" listener="#{clientebean.onRowReferenteSelect}"/>
+			
+								<p:column headerText="#{bundle.nomeCognome}">
+									<h:outputText value="#{ref.nome} #{ref.cognome}" />
+								</p:column>
+								<p:column headerText="#{bundle.incarico}">
+									<h:outputText value="#{ref.incarico}" />
+								</p:column>
+								<p:column headerText="#{bundle.telefono}">
+									<h:outputText value="#{ref.telefono}" />
+								</p:column>
+								<p:column headerText="#{bundle.cellulare}">
+									<h:outputText value="#{ref.cellulare}" />
+								</p:column>
+								<p:column headerText="#{bundle.mail}">
+									<h:outputText value="#{ref.mail}" />
+								</p:column>
+								<f:facet name="footer">
+									<p:commandButton process="referentiDataList" 
+										action="#{clientebean.editReferente}" 
+										icon="ui-icon-search" value="#{bundle.modifica}"
+										title="#{bundle.modificaReferente}"
+										update="@form" />
+								</f:facet>
+
+							</p:dataTable>
+			            </h:panelGrid>
+			        </p:tab>
+ 				</p:tabView>
+			</h:panelGrid>
+		</p:tab>
+
+		<p:tab title="#{bundle.lavori}">
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+			    <p:tabView>
+			        <p:tab title="#{bundle.addLavoro}">
+						<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+							<h:outputLabel for="descLav" value="#{bundle.descLavoro}: " />
+							<p:inputText value="#{clientebean.lavoro.nomeLavoro}" id="descLav" 
+								size="25" disabled="#{clientebean.disableLavoro}" 
+								/>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="8" columnClasses="column" cellpadding="2">
+							<h:outputLabel value="Referenti del Cliente" />
+							<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+							<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+							<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+							<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+							<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+							<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+							<h:outputLabel value="Referenti Associati a Lavoro" />
+						</h:panelGrid>
+						<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+						    <p:pickList id="pickList" 
+						    	style="width: 400px;"
+						    	disabled=""
+						    	addLabel="Aggiungi Referente a Lavoro"
+						    	addAllLabel="Aggiungi tutti i Referenti a Lavoro"
+						    	removeLabel="Rimuovi Referente da Lavoro"
+						    	removeAllLabel="Rimuovi tutti i Referenti da Lavoro"
+						    	value="#{clientebean.referentiPickList}" 
+						    	var="referente" 
+						    	itemLabel="#{referente.nome} #{referente.cognome}" 
+						    	itemValue="#{referente.id}" />
+						    
+			            </h:panelGrid>
+			            
+						<p:commandButton id="btnCreaLavoro" value="#{bundle.crea}"
+							action="#{clientebean.creaFolderLavoro}" 
+							icon="ui-icon-disk" update="@form" process="@form"
+							disabled="#{clientebean.disableLavoro}"/>
+			            
+			        </p:tab>
+			        <p:tab title="#{bundle.listaLavori}">
+						<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+							<p:treeTable value="#{clientebean.lavoriRoot}" var="lavoriRoot" paginator="true" rows="10">
+								<p:column headerText="#{bundle.lavoriReferenti}">
+									<p:link value="#{lavoriRoot.name}" />
+								</p:column>
+								<p:column headerText="#{bundle.statoLavori}">
+									<h:outputText value="#{lavoriRoot.stato}" />
+								</p:column>
+								<p:column style="width:24px">
+									<p:commandLink title="#{bundle.visualizzaDettagli}" styleClass="ui-icon ui-icon-search" />
+								</p:column>
+							</p:treeTable>
+						</h:panelGrid>
+			        </p:tab>
+			    </p:tabView>
+			</h:panelGrid>		
+		</p:tab>
+
+	</p:accordionPanel>
+	<p:separator />
+
+</h:form>
+
+<script type="text/javascript">
+// http://stackoverflow.com/questions/16076349/rowunselect-without-ctrlclick
+	function test(dt){
+		//alert("test");
+	    dt.unselectAllRows();
+	}
+</script>
+
+</html>

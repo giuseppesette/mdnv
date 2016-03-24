@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<persistence version='2.0'
+	xmlns='http://java.sun.com/xml/ns/persistence' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:schemaLocation='http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd'>
+
+	<persistence-unit name='mdnv' transaction-type='RESOURCE_LOCAL'>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<!-- jta-data-source>java:comp/env/Mdnv_MySQL</jta-data-source-->
+		<class>it.mdnv.model.Clienti</class>
+		<class>it.mdnv.model.DatiFatturazione</class>
+		<class>it.mdnv.model.Documenti</class>
+		<class>it.mdnv.model.Fornitori</class>
+		<class>it.mdnv.model.Lavori</class>
+		<class>it.mdnv.model.Referenti</class>
+		<class>it.mdnv.model.SedeOperativa</class>
+		<class>it.mdnv.model.StatoLavori</class>
+		<class>it.mdnv.model.Utenti</class>
+		<class>it.mdnv.model.Materiali</class>
+		<class>it.mdnv.model.Famiglia</class>
+		<class>it.mdnv.model.Prodotti</class>
+		<class>it.mdnv.model.Tipologie</class>
+		<class>it.mdnv.model.Parametri</class>
+		<class>it.mdnv.model.ProdFornitori</class>
+		<class>it.mdnv.model.Prodotti</class>
+		<class>it.mdnv.model.Assemblati</class>
+		<class>it.mdnv.model.Contatti</class>
+		<class>it.mdnv.model.Categorie</class>
+		<properties>
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+			<!-- Cancella e ricrea le tabelle nel database schema all'avvio 
+			<property name="hbm2ddl.auto">create</property>
+			-->
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/mdnv"/>
+			<property name="hibernate.connection.username" value="mdnv"/>
+			<property name="hibernate.connection.password" value="mdnv"/>
+			
+			<!-- Configuracion para mostrar en la consola los comandos de hibernate -->
+			<property name="hibernate.show_sql" value="false"/>
+			
+
+			
+			<!-- Configuracion de pool de conexiones -->
+			<property name="c3p0.acquire_increment" value="1"/>
+			<property name="c3p0.iddle_test_period" value="100"/>
+			<property name="c3p0.max_size" value="100"/>
+			<property name="c3p0.max_statements" value="0"/>
+			<property name="c3p0.min_size" value="5"/>
+			<property name="c3p0.timeout" value="100"/>
+			
+			<property name="c3p0.acquireRetryDelay" value="1000"/>
+			<property name="c3p0.acquireRetryAttempts" value="60"/>
+			<property name="c3p0.breakAfterAcquireFailure" value="false"/>
+		    <!-- 
+			<property name='javax.persistence.jdbc.driver' value='com.mysql.jdbc.Driver' />
+			<property name='javax.persistence.jdbc.url' value='jdbc:mysql://localhost:3306/mdnv' />
+			<property name='javax.persistence.jdbc.user' value='mdnv' />
+			<property name='javax.persistence.jdbc.password' value='mdnv' />
+			
+			<property name='hibernate.dialect' value='org.hibernate.dialect.MySQLDialect' />
+			<property name='hibernate.connection.shutdown' value='true' />
+			<property name='hibernate.hbm2ddl.auto' value='update' />
+			<property name='hibernate.show_sql' value='true' />
+			<property name='hibernate.format_sql' value='false' />
+			 -->
+		</properties>
+	</persistence-unit>
+</persistence>

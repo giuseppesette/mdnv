@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+
+    <p:tabView>
+        <p:tab title="Aggiungi Referente">
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+
+				<h:outputLabel for="nomeRef" value="Nome: " />
+				<p:inputText value="" id="nomeRef" size="20" />
+			
+				<h:outputLabel for="cognomeRef" value="Cognome: " />
+				<p:inputText value="" id="cognomeRef" size="20" />
+			
+				<h:outputLabel for="incaricoRef" value="Incarico " />
+				<p:inputText value="" id="incaricoRef" size="20" />
+			
+				<h:outputLabel for="telRef" value="Telefono: " />
+				<p:inputText value="" id="telRef" size="20" />
+			
+				<h:outputLabel for="cellRef" value="Cellulare: " />
+				<p:inputText value="" id="cellRef" size="20" />
+			
+				<h:outputLabel for="mailRef" value="Mail " />
+				<p:inputText value="" id="mailRef" size="20" />
+			
+				<p:button value="Salva" icon="ui-icon-disk" />
+            </h:panelGrid>
+        </p:tab>
+        <p:tab title="Lista Referenti">
+            <h:panelGrid columns="2" cellpadding="2">
+				<p:dataTable id="referentiDataList" var="referente" value="#{referentiDTView.ref2}"
+					selectionMode="single" selection="#{referentiDTView.selectedReferente}"
+					rowKey="#{referente.cognome}">
+
+					<p:column headerText="Nome e Cognome">
+						<h:outputText value="#{referente.nome} #{referente.cognome}" />
+					</p:column>
+					<p:column headerText="Incarico">
+						<h:outputText value="#{referente.incarico}" />
+					</p:column>
+					<p:column headerText="Telefono">
+						<h:outputText value="#{referente.telefono}" />
+					</p:column>
+					<p:column headerText="Cellulare">
+						<h:outputText value="#{referente.cellulare}" />
+					</p:column>
+					<p:column headerText="Mail">
+						<h:outputText value="#{referente.mail}" />
+					</p:column>
+				</p:dataTable>
+            </h:panelGrid>
+        </p:tab>
+    </p:tabView>
+ 
+
+
+
+</h:panelGrid>
+
+
+</html>

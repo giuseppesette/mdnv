@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:panelGrid columns="2" cellpadding="2">
+	<p:dataTable id="fattureDataList" var="fatt"
+		value="#{fattureDTView.fatt2}" selectionMode="single"
+		selection="#{fattureDTView.selectedFattura}"
+		rowKey="#{fatt.numeroFattura}">
+
+		<p:column headerText="Numero Fattura">
+			<h:outputText value="#{fatt.numeroFattura}" />
+		</p:column>
+		<p:column headerText="Data Fattura">
+			<h:outputText value="#{fatt.dataFattura}" />
+		</p:column>
+		<p:column headerText="Pagato" styleClass="picsColumn1">
+			<!-- <span class="ui-icon ui-icon-arrow-r ui-icon-shadow"></span> -->
+			<p:graphicImage id="ok-pic" value="../icons/ok.gif" height="16px" width="16px" cache="FALSE" />
+		</p:column>
+		<p:column style="width:24px">
+			<p:commandLink title="Visualizza Fattura" styleClass="ui-icon ui-icon-search" />
+		</p:column>
+		
+	</p:dataTable>
+</h:panelGrid>
+
+</html>

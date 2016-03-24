@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lavoro radice="L:\LAVORO\70_MD\MODONOVO_LAVORI\" childs="subdir; subdir2">
+	<dir id="1_AMMINISTRAZIONE">
+		<subdir id="2013_F24"/>
+		<subdir id="2014_F24"/>
+		<subdir id="ARCHIVIOCLIENTI"/>
+		<subdir id="BANCHE"/>
+		<subdir id="CERTIFICAZIONI"/>
+		<subdir id="CONAI"/>
+		<subdir id="CONTRATTI LEASING"/>
+		<subdir id="DURC"/>
+		<subdir id="EAU"/>
+		<subdir id="IRAP"/>
+		<subdir id="IVA"/>
+		<subdir id="MODELLI_SPEDIZIONE"/>
+		<subdir id="MODELLI FATTURE"/>
+		<subdir id="SPEDIZIONI"/>
+		<subdir id="WEB_USER_PASS"/>
+		<subdir id="CONTATTI AZIENDALI"/>
+	</dir>
+	<dir id="2_MODELLI">
+		<subdir id="ALLEGATI OFFERTE"/>
+		<subdir id="APPENDICE CONTRATTO"/>
+		<subdir id="LOGO MODONOVO"/>
+		<subdir id="FATTURE"/>
+		<subdir id="UTE">
+			<subdir2 id="CARTIGLI SP"/>
+			<subdir2 id="LISTA FERRAMENTA"/>
+			<subdir2 id="LISTA TAGLI"/>
+		</subdir>
+		<subdir id="2014_000_F_NOMEFATTURA"/>
+		<subdir id="2014_000_KING_00"/>
+		<subdir id="2014_000_MODELLO CARTA IMPAGINATO"/>
+		<subdir id="2014_000_CARTA INTESTATA"/>
+		<subdir id="2014_000_OFF_A_NOMEOFFERTA"/>
+		<subdir id="2014_000_SL"/>
+		<subdir id="COPERTINA LAVORO FALDONE"/>
+	</dir>
+	<dir id="3_MARKETING_COMMERCIALE">
+		<subdir id="COMPETITOR"/>
+		<subdir id="CONTATTI"/>
+		<subdir id="ARCHIVIOCLIENTI"/>
+		<subdir id="FIERE EVENTI"/>
+		<subdir id="LISTINI"/>
+		<subdir id="PORTALI"/>
+		<subdir id="R_S"/>
+		<subdir id="RIVISTE"/>
+		<subdir id="SERVIZI"/>
+		<subdir id="PRESS"/>
+		<subdir id="RIVENDITORI"/>
+	</dir>
+	<dir id="4_FORNITORI"/>
+	<dir id="5_LAVORI">
+		<subdir id="0_LAVORI2013"/>
+		<subdir id="0_LAVORI2014"/>
+		<subdir id="2014_000_NOMELAVORO_RACFP"/>
+		<subdir id="CARTELLE LAVORO"/>
+	</dir>
+	<dir id="6_COMUNICAZIONE">
+		<subdir id="0_SPUNTI_IDEE"/>
+		<subdir id="ARCHIVIO"/>
+		<subdir id="LOGHI"/>
+		<subdir id="PUBBLICITA"/>
+		<subdir id="WEB"/>
+		<subdir id="BIGLIETTI VISITA"/>
+		<subdir id="BROCHURE"/>
+		<subdir id="CORTEN-COLORI"/>
+		<subdir id="CATALOGHI"/>
+		<subdir id="PRESENTAZIONI"/>
+	</dir>
+	<dir id="7_PRODOTTI">
+		<subdir id="DISEGNI SOLIDWORKS"/>
+		<subdir id="ESISTENTE"/>
+		<subdir id="PARTNERS"/>
+		<subdir id="PRODUCTS CONSUMER"/>
+		<subdir id="PRODUCTS MATERIAL"/>
+		<subdir id="PRODUCTS PROFESSIONAL"/>
+		<subdir id="PROJECT"/>
+		<subdir id="RACCOLTA OLD"/>
+		<subdir id="VADEMECUM OLD"/>
+	</dir>
+	<dir id="8_PRODUZIONE"/>
+	<dir id="9_INFORMATICA"/>
+	<dir id="10_FILENONCONFORMI"/>
+</lavoro>

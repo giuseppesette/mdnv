@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+
+	<p:tabView>
+		<p:tab title="#{bundle.addSedeOperativa}">
+			<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+				<h:outputLabel for="ragSocSedeOp" value="#{bundle.ragioneSociale} " />
+				<p:inputText value="#{sedeopbean.sedeop.ragione_sociale}"
+					id="ragSocSedeOp" size="60" maxlength="255" />
+			</h:panelGrid>
+
+			<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+
+				<h:outputLabel for="nomeSedeOp" value="#{bundle.nome} " />
+				<p:inputText value="#{sedeopbean.sedeop.nome}" id="nomeSedeOp"
+					size="20" maxlength="255" />
+
+				<h:outputLabel for="cognomeSedeOp" value="#{bundle.cognome}: " />
+				<p:inputText value="#{sedeopbean.sedeop.cognome}" id="cognomeSedeOp"
+					size="20" maxlength="255" />
+
+				<h:outputLabel for="addressSedeOp" value="#{bundle.indirizzo}: " />
+				<p:inputText value="#{sedeopbean.sedeop.indirizzo}"
+					id="addressSedeOp" size="20" maxlength="255" />
+
+				<h:outputLabel for="comuneSedeOp" value="#{bundle.comune}: " />
+				<p:inputText value="#{sedeopbean.sedeop.comune}" id="comuneSedeOp"
+					size="20" maxlength="255" />
+
+				<h:outputLabel for="capSedeOp" value="#{bundle.cap}: " />
+				<p:inputText value="#{sedeopbean.sedeop.cap}" id="capSedeOp"
+					size="20" maxlength="10" />
+
+				<h:outputLabel for="provSedeOp" value="#{bundle.provincia}: " />
+				<p:inputText value="#{sedeopbean.sedeop.prov}" id="provSedeOp"
+					size="20" maxlength="255" />
+
+				<h:outputLabel for="nazSedeOp" value="#{bundle.nazione}: " />
+				<p:inputText value="#{sedeopbean.sedeop.nazione}" id="nazSedeOp"
+					size="20" maxlength="255" />
+
+
+			</h:panelGrid>
+
+			<p:commandButton id="btnSalvaSedeOperativa" value="#{bundle.salva}"
+				action="#{sedeopbean.save}" icon="ui-icon-disk"  update="@form" process="@form"/>
+
+		</p:tab>
+		<p:tab title="#{bundle.listaSediOperative}">
+			<p:growl id="growl" showDetail="true"/>  
+			<h:panelGrid columns="2" cellpadding="10">
+				<p:dataTable id="sediOperativeDataList" var="sedeOp"
+					paginator="true" rows="5"
+					value="#{sedeopbean.sd}" 
+					selectionMode="single"
+					selection="#{sedeopbean.selectedSedeOperativa}"
+					rowKey="#{sedeOp.id}"
+					rowSelectListener="#{sedeopbean.onRowSelect}"
+                    rowUnselectListener="#{sedeopbean.onRowUnselect}">
+					<p:column headerText="#{bundle.ragioneSociale}">
+						<h:outputText value="#{sedeOp.ragione_sociale}" />
+					</p:column>
+					<p:column headerText="#{bundle.nome}">
+						<h:outputText value="#{sedeOp.nome}" />
+					</p:column>
+					<p:column headerText="#{bundle.cognome}">
+						<h:outputText value="#{sedeOp.cognome}" />
+					</p:column>
+					<!-- 
+			        <p:column style="width:24px;text-align: center">
+			             <p:commandButton update=":form:sedeOpDetail" oncomplete="PF('sedeOpDialog').show()" icon="ui-icon-search" title="#{bundle.visualizza}">
+			                <f:setPropertyActionListener value="#{sedeOp}" target="#{sedeopbean.selectedSedeOperativa}" />
+			            </p:commandButton>
+			        </p:column>
+			         -->
+				</p:dataTable>
+			</h:panelGrid>
+		</p:tab>
+	</p:tabView>
+
+</h:panelGrid>
+
+<!--  
+<p:dialog header="#{bundle.sedeOperativa}" widgetVar="sedeOpDialog" modal="true"
+	showEffect="blind" hideEffect="explode" resizable="false">
+	<p:outputPanel id="sedeOpDetail" style="text-align:center;">
+		<p:panelGrid columns="2"
+			rendered="#{not empty sedeopbean.selectedSedeOperativa}"
+			columnClasses="label,value">
+			<f:facet name="header">
+				<p:graphicImage
+					name="../demo/images/car/#{fornitoriDTView.selectedFornitore.brand}-big.gif" />
+			</f:facet>
+			<h:outputText value="#{bundle.ragioneSociale}:" />
+			<h:outputText value="#{sedeOp.selectedSedeOperativa.ragione_sociale}" />
+
+			<h:outputText value="#{bundle.nome}:" />
+			<h:outputText value="#{sedeOp.selectedSedeOperativa.nome}" />
+
+			<h:outputText value="#{bundle.cognome}" />
+			<h:outputText value="#{sedeOp.selectedSedeOperativa.cognome}" />
+
+			<h:outputText value="#{bundle.indirizzo}:" />
+			<h:outputText value="#{sedeOp.selectedSedeOperativa.indirizzo}" />
+
+			<h:outputText value="#{bundle.comune}" />
+			<h:outputText value="#{sedeOp.selectedSedeOperativa.comune}" />
+
+			<h:outputText value="#{bundle.cap}" />
+			<h:outputText value="#{sedeOp.selectedSedeOperativa.cap}" />
+
+			<h:outputText value="#{bundle.provincia}" />
+			<h:outputText value="#{sedeOp.selectedSedeOperativa.prov}" />
+
+			<h:outputText value="#{bundle.nazione}" />
+			<h:outputText value="#{sedeOp.selectedSedeOperativa.nazione}" />
+		</p:panelGrid>
+	</p:outputPanel>
+</p:dialog>
+-->
+</html>

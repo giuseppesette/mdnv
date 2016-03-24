@@ -1,0 +1,15 @@
+
+http://www.mkyong.com/google-app-engine/google-app-engine-hello-world-example-using-eclipse/
+
+======================================================================
+https://groups.google.com/forum/#!topic/google-appengine/2hdM9DOsY54
+Errore di autenticazione in fase di deploy:
+com.google.api.client.auth.oauth2.TokenResponseException: 400 Bad Request
+
+Soluzione:
+When you open Eclipse and your App Engine project, look in the bottom right hand corner. 
+Do you see a "Sign in to Google" button or your Google email address there? 
+If you do, click it and either log in with the right account or log out.
+======================================================================
+
+http://www.vogella.com/tutorials/GoogleAppEngineJava/article.html

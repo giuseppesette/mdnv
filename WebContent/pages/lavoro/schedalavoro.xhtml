@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form id="form">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+		<h:outputLabel for="frn" value="#{bundle.elencoClienti}: " />
+		<p:selectOneMenu id="frn" style="width:220px"
+			value="#{lavorobean.cliente}"
+			onchange="clientiChangeHandler(this)"
+			disabled="#{lavorobean.disableLavoro}">
+			
+			<p:ajax listener="#{lavorobean.onClientiChange}" update="descLav, pickList" />
+			
+			<f:selectItem itemLabel="Seleziona un Cliente..." itemValue=""
+				noSelectionOption="true" />
+	
+			<f:selectItems value="#{lavorobean.clienti}" />
+		</p:selectOneMenu>
+	</h:panelGrid>
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+		<h:outputLabel for="descLav" value="#{bundle.descLavoro}: " />
+		<p:inputText value="#{lavorobean.lavoro.nomeLavoro}" id="descLav" 
+			size="25" disabled="#{lavorobean.disableLavoro}" />
+	</h:panelGrid>
+	
+	<h:panelGrid columns="8" columnClasses="column" cellpadding="2">
+		<h:outputLabel value="Referenti del Cliente" />
+		<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+		<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+		<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+		<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+		<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+		<h:outputText value="&#160;&#160;&#160;&#160;&#160;" />
+		<h:outputLabel value="Referenti Associati a Lavoro" />
+	</h:panelGrid>
+	
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+	    <p:pickList id="pickList" 
+	    	style="width: 400px;"
+	    	disabled=""
+	    	addLabel="Aggiungi Referente a Lavoro"
+	    	addAllLabel="Aggiungi tutti i Referenti a Lavoro"
+	    	removeLabel="Rimuovi Referente da Lavoro"
+	    	removeAllLabel="Rimuovi tutti i Referenti da Lavoro"
+	    	value="#{lavorobean.referentiPickList}" 
+	    	var="referente" 
+	    	itemLabel="#{referente.nome} #{referente.cognome}" 
+	    	itemValue="#{referente.id}" />
+	    
+    </h:panelGrid>
+          
+	<p:commandButton id="btnCreaLavoro" value="#{bundle.crea}"
+		disabled="#{lavorobean.disableLavoro}"
+		action="#{lavorobean.creaFolderLavoro}" icon="ui-icon-disk" update="@form" process="@form"/>
+ 
+	<p:commandButton id="btnAggiorna" value="#{bundle.aggiorna}" 
+		action="#{lavorobean.updateFolderLavoro}" icon="ui-icon-disk" update="@form"
+		rendered="#{lavorobean.updateRendered}"/>
+ 
+	<p:separator />
+
+</h:form>
+<script type="text/javascript">
+	function clientiChangeHandler(combo) {
+/**
+		var label = document.getElementById(codiceFrnLblId);
+		var txt = document.getElementById(codiceFrnTxtId);
+		//alert("combo: " + combo + " - codiceFrnLblId: " + codiceFrnLblId + " - codiceFrnTxtId: " + codiceFrnTxtId);
+
+		document.getElementById(codiceFrnTxtId).innerHTML = "";
+		var select = jQuery(combo);
+		document.getElementById(codiceFrnTxtId).innerHTML = select.val() + '_';
+
+		//alert("combo val: " + select.val());
+		if (select.val() != '') {
+
+			if (label.style.display == 'none') {
+				label.style.display = 'block';
+			}
+
+			if (txt.style.display == 'none') {
+				txt.style.display = 'block'
+			}
+		} else {
+			label.style.display = 'none';
+			txt.style.display = 'none';
+		}
+**/
+	}
+</script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/pftemplates/BasicTemplate.xhtml">
+    <ui:define name="content">
+		<h:form>
+			<p:panel id="panel" header="Accesso">
+
+				<p:messages id="msgs" />
+
+				<h:panelGrid columns="3" cellpadding="5">
+					<p:outputLabel for="Username" value="#{bundle.loginUserName}" />
+					<p:inputText id="Username" value="#{loginbean.email}" required="true" label="Name">
+						<f:validateLength minimum="3" />
+					</p:inputText>
+					<p:message for="Username" display="icon" />
+
+					<p:outputLabel for="Password" value="#{bundle.loginPassword}" />
+					<p:password id="Password" value="#{loginbean.password}"	label="Password" required="true"  autocomplete="off">
+						<f:validateLength minimum="3" />
+					</p:password>
+					<p:message for="Password" id="msgPassword" display="icon" />
+
+				</h:panelGrid>
+
+ 				<h:commandButton value="Login" action="#{loginbean.login}" ajax="false" />
+
+			</p:panel>
+		</h:form>
+
+    </ui:define>
+</ui:composition>
+</html>

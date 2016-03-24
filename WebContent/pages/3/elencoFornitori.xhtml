@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+
+	<p:tabView>
+		<p:tab title="Aggiungi Fornitore">
+			<h:panelGrid columns="1" columnClasses="column" cellpadding="2">
+				<h:panelGrid columns="9" columnClasses="column" cellpadding="2">
+					<h:outputLabel for="frn" value="Fornitore: " />
+					<p:selectOneMenu id="frn" style="width:150px"
+						value="#{fornitoreView.fornitore}"
+						onchange="fornitoreChangeHandler(this, '#{requestScope.codiceFrnLbl.clientId}', '#{requestScope.codiceFrnTxt.clientId}')">
+						<f:selectItem itemLabel="Seleziona..." itemValue=""
+							noSelectionOption="true" />
+
+						<f:selectItems value="#{fornitoreView.fornitori}" />
+					</p:selectOneMenu>
+					<h:outputText value="   " />
+					<h:outputLabel binding="#{requestScope.codiceFrnLbl}"
+						id="codFornitore" style="display: none" for="codFornitore"
+						value="Codice Fornitore: " />
+					<h:outputText binding="#{requestScope.codiceFrnTxt}"
+						id="lblCodiceFornitore" value=""
+						style="display: none; font-weight:bold" />
+					<h:outputText value="   " />
+					<h:outputLabel for="codArtFornitore" value="Codice Articolo: " />
+					<p:inputText value="" id="codArtFornitore" size="8" />
+
+					<p:rating value="#{ratingView.rating1}" />
+
+				</h:panelGrid>
+				<p:separator />
+				<h:panelGrid columns="4" columnClasses="column" cellpadding="2">
+
+					<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+						<h:outputLabel for="dimensioneMateriale" value="Dimensione: " />
+						<p:inputText value="" id="dimensioneMateriale" size="20" />
+						<h:outputLabel for="unitaMiseraMateriale" value="UM: " />
+						<p:inputText value="" id="unitaMiseraMateriale" size="20" />
+						<h:outputLabel for="pesoMateriale" value="Peso: " />
+						<p:inputText value="" id="pesoMateriale" size="20" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+						<h:outputLabel for="costo1" value="Costo: " />
+						<p:inputText value="" id="costo1" size="20" />
+						<h:outputLabel for="costo2" value="Costo: " />
+						<p:inputText value="" id="costo2" size="20" />
+						<h:outputLabel for="costo3" value="Costo: " />
+						<p:inputText value="" id="costo3" size="20" />
+						<h:outputLabel for="costo4" value="Costo: " />
+						<p:inputText value="" id="costo4" size="20" />
+						<h:outputLabel for="costo5" value="Costo: " />
+						<p:inputText value="" id="costo5" size="20" />
+					</h:panelGrid>
+
+					<h:panelGrid columns="2" columnClasses="column" cellpadding="2">
+						<h:outputLabel for="costoInterno" value="Costo Interno: " />
+						<p:inputText value="" id="costoInterno" size="20" />
+
+						<h:outputLabel for="minOrdine" value="Min Ordine: " />
+						<p:inputText value="" id="minOrdine" size="20" />
+
+
+						<h:outputLabel for="modPagamento" value="Mod. Pagamento: " />
+						<p:inputText value="" id="modPagamento" size="20" />
+					</h:panelGrid>
+
+
+
+				</h:panelGrid>
+
+				<h:outputLabel for="noteFornitore" value="Note: " />
+				<p:inputTextarea id="noteFornitore" rows="4" cols="60" />
+
+				<p:button value="Salva" icon="ui-icon-disk" />
+			</h:panelGrid>
+		</p:tab>
+		<p:tab title="Lista Fornitori Materiale">
+			<h:panelGrid columns="2" cellpadding="10">
+				<p:dataTable id="frnDataList" var="frn"
+					value="#{fornitoriDTView.frn2}" selectionMode="single"
+					selection="#{fornitoriDTView.selectedFornitore}"
+					rowKey="#{frn.model}">
+					<p:column headerText="Fornitore">
+						<h:outputText value="#{frn.model}" />
+					</p:column>
+					<p:column headerText="Cod Fornitore">
+						<h:outputText value="#{frn.year}" />
+					</p:column>
+					<p:column headerText="Cod Art Fornitore">
+						<h:outputText value="#{frn.brand}" />
+					</p:column>
+					<p:column headerText="Costo Interno">
+						<h:outputText value="#{frn.color}" />
+					</p:column>
+					<p:column style="width:24px;text-align: center">
+						<p:commandButton icon="ui-icon-search"
+							title="Visualizza Materiale" />
+					</p:column>
+				</p:dataTable>
+
+
+			</h:panelGrid>
+		</p:tab>
+	</p:tabView>
+
+
+
+
+</h:panelGrid>
+
+<script type="text/javascript">
+	function fornitoreChangeHandler(combo, codiceFrnLblId, codiceFrnTxtId) {
+
+		var label = document.getElementById(codiceFrnLblId);
+		var txt = document.getElementById(codiceFrnTxtId);
+		//alert("combo: " + combo + " - codiceFrnLblId: " + codiceFrnLblId + " - codiceFrnTxtId: " + codiceFrnTxtId);
+
+		document.getElementById(codiceFrnTxtId).innerHTML = "";
+		var select = jQuery(combo);
+		document.getElementById(codiceFrnTxtId).innerHTML = select.val() + '_';
+
+		//alert("combo val: " + select.val());
+		if (select.val() != '') {
+
+			if (label.style.display == 'none') {
+				label.style.display = 'block';
+			}
+
+			if (txt.style.display == 'none') {
+				txt.style.display = 'block'
+			}
+		} else {
+			label.style.display = 'none';
+			txt.style.display = 'none';
+		}
+
+	}
+</script>
+
+</html>

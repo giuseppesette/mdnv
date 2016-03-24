@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form id="form">
+		<p:messages autoUpdate="true" display="text" closable="true"/>
+
+		<h:panelGrid columns="1" columnClasses="column" cellpadding="2">
+			<ui:include src="/pages/materiali/0_datigenerali.xhtml" />
+		</h:panelGrid>
+		
+		<p:accordionPanel activeIndex="#{prodottibean.activeIndex}">
+			<p:tab title="#{bundle.schedaMateriale}">
+				<ui:include src="/pages/materiali/1_schedamateriali.xhtml" />
+			</p:tab>
+			<p:tab title="#{bundle.elencoFornitori}">
+				<ui:include src="/pages/materiali/2_schedaprodfornitori.xhtml" />
+			</p:tab>
+		</p:accordionPanel>
+		
+		<p:separator />
+	
+	</h:form>
+
+	<script type="text/javascript">
+		function famigliaChangeHandler(that) {
+			/*
+			document.getElementById("form:lblCodProdotto").innerHTML = "";
+			var select = jQuery(that);
+			document.getElementById("form:lblCodProdotto").innerHTML = select.val()
+					+ '_';
+			*/
+		}
+	
+		function tipologiaChangeHandler(that) {
+			/*
+			var select = jQuery(that);
+			var actual = document.getElementById("form:lblCodProdotto").innerHTML;
+			var famiglia = actual.substring(0, 3);
+			//alert("[myChangeHandler2] - actual: "+actual+"  famiglia: " + famiglia);
+			document.getElementById("form:lblCodProdotto").innerHTML = famiglia
+					+ select.val() + '_';
+			*/	
+		}
+		
+		function fornitoreChangeHandler(combo, codiceFrnLblId, codiceFrnTxtId) {
+			
+			var label = document.getElementById(codiceFrnLblId);
+			var txt = document.getElementById(codiceFrnTxtId);
+			//alert("combo: " + combo + " - codiceFrnLblId: " + codiceFrnLblId + " - codiceFrnTxtId: " + codiceFrnTxtId);
+	
+			document.getElementById(codiceFrnTxtId).innerHTML = "";
+			var select = jQuery(combo);
+			//document.getElementById(codiceFrnTxtId).innerHTML = select.val() + '_';
+			document.getElementById(codiceFrnTxtId).innerHTML = select.val();
+	
+			//alert("combo val: " + select.val());
+			if (select.val() != '') {
+	
+				if (label.style.display == 'none') {
+					label.style.display = 'block';
+				}
+	
+				if (txt.style.display == 'none') {
+					txt.style.display = 'block'
+				}
+			} else {
+				label.style.display = 'none';
+				txt.style.display = 'none';
+			}
+	
+		}
+	
+	</script>
+
+</html>

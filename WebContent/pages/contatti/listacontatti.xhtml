@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:form id="formDataTable">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<p:dataTable id="contattiDataList" var="contatto" value="#{lcontattobean.contattiLista}"
+		paginator="true" rows="10"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,15,20,25,30,50" 
+		selectionMode="single" 
+		selection="#{lcontattobean.selectedContatto}"
+		rowKey="#{contatto.id}">
+		
+		<p:ajax event="rowSelect" listener="#{lcontattobean.onRowContattoSelect}" />
+		
+		<f:facet name="header">
+            #{bundle.listaContatti}
+        </f:facet>
+		<p:column headerText="#{bundle.id}">
+			<h:outputText value="#{contatto.id}" />
+		</p:column>
+		<p:column headerText="#{bundle.ragioneSociale}">
+			<h:outputText value="#{contatto.ragioneSociale}" />
+		</p:column>
+		<p:column headerText="#{bundle.mail}">
+			<h:outputText value="#{contatto.mail1}" />
+		</p:column>
+		<p:column headerText="#{bundle.telefono}">
+			<h:outputText value="#{contatto.telefono1}" />
+		</p:column>
+		<f:facet name="footer">
+			<p:commandButton process="contattiDataList" 
+				action="#{lcontattobean.editContatto}" 
+				icon="ui-icon-pencil" value="#{bundle.modifica}"
+				title="#{bundle.modificaContatto}"/>
+				
+			<p:commandButton process="contattiDataList" 
+				action="#{lcontattobean.cancellaContatto}" 
+				icon="ui-icon-close" value="#{bundle.elimina}"
+				title="#{bundle.eliminaContatto}"
+				update="@form" ajax="true"
+				/>
+		</f:facet>
+	</p:dataTable>
+
+</h:form>
+
+</html>

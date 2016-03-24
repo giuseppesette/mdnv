@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form id="form">
+	<h:panelGrid columns="7" columnClasses="column" cellpadding="5">
+
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel for="famiglia" value="Famiglia: " />
+			<p:selectOneMenu id="famiglia" style="width:150px"
+				value="#{famigliaTipologiaView.famiglia}"
+				onchange="famigliaChangeHandler(this)">
+				<p:ajax listener="#{famigliaTipologiaView.onFamigliaChange}"
+					update="tipologia" />
+				<f:selectItem itemLabel="Seleziona..." itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{famigliaTipologiaView.famiglie}" />
+			</p:selectOneMenu>
+
+			<p:outputLabel for="tipologia" value="Tipologia: " />
+			<p:selectOneMenu id="tipologia" style="width:150px"
+				value="#{famigliaTipologiaView.tipologia}"
+				onchange="tipologiaChangeHandler(this)">
+				<f:selectItem itemLabel="Seleziona..." itemValue=""
+					noSelectionOption="true" />
+				<f:selectItems value="#{famigliaTipologiaView.tipologie}" />
+			</p:selectOneMenu>
+		</h:panelGrid>
+
+		<h:outputLabel for="nomeMateriale" value="Nome: " />
+		<p:autoComplete id="nomeMateriale" minQueryLength="3"
+			value="#{materialiView.nomeMateriale}"
+			completeMethod="#{materialiView.completeText}" effect="fade"
+			size="40" />
+
+		<h:outputLabel for="codProdotto" value="Codice Prodotto: " />
+		<h:outputText id="lblFamiglia" value="" style="font-weight:bold" />
+
+		<p:inputText value="" id="codProdotto" size="8" />
+
+	</h:panelGrid>
+</h:form>
+<script type="text/javascript">
+	function famigliaChangeHandler(that) {
+		document.getElementById("form:lblFamiglia").innerHTML = "";
+		var select = jQuery(that);
+		document.getElementById("form:lblFamiglia").innerHTML = select.val()
+				+ '_';
+	}
+
+	function tipologiaChangeHandler(that) {
+		var select = jQuery(that);
+		var actual = document.getElementById("form:lblFamiglia").innerHTML;
+		var famiglia = actual.substring(0, 3);
+		//alert("[myChangeHandler2] - actual: "+actual+"  famiglia: " + famiglia);
+		document.getElementById("form:lblFamiglia").innerHTML = famiglia
+				+ select.val() + '_';
+	}
+</script>
+</html>

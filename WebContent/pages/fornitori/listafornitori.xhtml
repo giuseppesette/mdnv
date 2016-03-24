@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:form id="formDataTable">
+
+	<p:messages autoUpdate="true" display="text" closable="true"/>
+
+	<p:dataTable id="fornitoriDataList" var="fornitore" value="#{lfornitorebean.fornitoriLista}"
+		paginator="true" rows="10"
+		selectionMode="single" 
+		selection="#{lfornitorebean.selectedFornitore}"
+		rowKey="#{fornitore.codFornitore}">
+		
+		<p:ajax event="rowSelect" listener="#{lfornitorebean.onRowFornitoreSelect}" />
+		
+		<f:facet name="header">
+            #{bundle.listaFornitori}
+        </f:facet>
+		<p:column headerText="#{bundle.codiceFornitore}">
+			<h:outputText value="#{fornitore.codFornitore}" />
+		</p:column>
+		<p:column headerText="#{bundle.ragioneSociale}">
+			<h:outputText value="#{fornitore.ragioneSociale}" />
+		</p:column>
+		<p:column headerText="#{bundle.dataInserimento}">
+			<h:outputText value="#{fornitore.dataInserimento}" />
+		</p:column>
+
+		<f:facet name="footer">
+			<p:commandButton process="fornitoriDataList" 
+				action="#{lfornitorebean.editFornitore}" 
+				icon="ui-icon-pencil" value="#{bundle.modifica}"
+				title="#{bundle.modificaFornitore}"/>
+				
+			<p:commandButton process="fornitoriDataList" 
+				action="#{lfornitorebean.cancellaFornitore}" 
+				icon="ui-icon-close" value="#{bundle.elimina}"
+				title="#{bundle.eliminaFornitore}"
+				update="@form" ajax="true"
+				/>
+		</f:facet>
+	</p:dataTable>
+
+</h:form>
+
+</html>

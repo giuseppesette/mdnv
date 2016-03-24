@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:form id="form">
+
+	<p:messages autoUpdate="true" />
+	
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2" title="createFolderTreeFromXML">
+		<p:commandButton id="btnSalva1"
+			value="Crea Da Xml" action="#{tbean.createFolderTreeFromXML}" icon="ui-icon-disk" update="@form"/>
+	</h:panelGrid>
+<p:separator />
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2" title="createFolderTreeInTargetFolder">
+
+		<h:outputLabel for="targetFolder" value="(*) Cartella di Destinazione: " />
+		<p:inputText value="#{tbean.strTargetPath}" id="targetFolder" size="20" />
+		
+		<p:commandButton id="btnSalva2"
+			value="Crea In Folder" action="#{tbean.createFolderTreeInTargetFolder}" icon="ui-icon-disk" update="@form"/>
+	</h:panelGrid>
+<p:separator />
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2" title="createFolderTreeUseSambaLib">
+
+		<h:outputLabel for="targetFolder2" value="Cartella di Destinazione: " />
+		<p:inputText value="#{tbean.strTargetPath2}" id="targetFolder2" size="20" />
+		
+		<h:outputLabel for="username" value="Username: " />
+		<p:inputText value="#{tbean.username}" id="username" size="20" />
+		
+		<h:outputLabel for="password" value="Password: " />
+		<p:inputText value="#{tbean.password}" id="password" size="20" />
+		
+		<p:commandButton id="btnSalva3"
+			value="Crea con Samba Lib" action="#{tbean.createFolderTreeUseSambaLib}" icon="ui-icon-disk" update="@form"/>
+	</h:panelGrid>
+<p:separator />
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2" title="createFolderTreeUseURL">
+
+		<h:outputLabel for="targetFolder3" value="Cartella di Destinazione: " />
+		<p:inputText value="#{tbean.strTargetPath3}" id="targetFolder3" size="20" />
+		
+		<p:commandButton id="btnSalva4"
+			value="Crea con URL protocol" action="#{tbean.createFolderTreeUseURL}" icon="ui-icon-disk" update="@form"/>
+	</h:panelGrid>
+<p:separator />
+	<h:panelGrid columns="2" columnClasses="column" cellpadding="2" title="createFolderTreeUseCommandDos">
+
+		<h:outputLabel for="strSourcePath" value="Cartella Sorgente: " />
+		<p:inputText value="#{tbean.strSourcePath}" id="strSourcePath" size="20" />
+		
+		<h:outputLabel for="strTargetPath4" value="Cartella di Destinazione: " />
+		<p:inputText value="#{tbean.strTargetPath4}" id="strTargetPath4" size="20" />
+		
+		<h:outputLabel for="dosCommand" value="Comando DOS: " />
+		<p:inputText value="#{tbean.dosCommand}" id="dosCommand" size="20" />
+		
+		<p:commandButton id="btnSalva5"
+			value="Crea con DOS Command" action="#{tbean.createFolderTreeUseCommandDos}" icon="ui-icon-disk" update="@form"/>
+	</h:panelGrid>
+<p:separator />
+
+</h:form>
+</html>

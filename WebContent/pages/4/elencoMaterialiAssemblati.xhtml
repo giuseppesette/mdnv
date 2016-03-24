@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:form id="frmAss">
+    <p:growl id="msgs" />
+ 
+    <p:panel header="Inserisci un Materiale" style="margin-bottom:20px">
+        <h:panelGrid columns="6" cellpadding="5">
+            <h:outputLabel value="Materiale: " for="txtMateriale:"></h:outputLabel>
+            <p:inputText id="txtMateriale" value="#{collectorMatAssView.materiale.prodotto}" required="true"/>
+ 
+            <h:outputLabel value="Quantità: " for="txtQuantita"></h:outputLabel>
+            <p:inputText id="txtQuantita" value="#{collectorMatAssView.materiale.quantita}" size="6" required="true"/>
+ 
+            <p:commandButton id="btn_reset" value="Reset" type="reset"/>
+            <p:commandButton id="btn_add" value="Aggiungi" update="listaMateriali msgs @parent" action="#{collectorMatAssView.reinit}" >
+                <p:collector value="#{collectorMatAssView.materiale}" addTo="#{collectorMatAssView.materiali}" unique="true"/>
+            </p:commandButton>
+        </h:panelGrid>
+    </p:panel>
+ 
+    <p:outputPanel id="listaMateriali">
+        <p:dataTable value="#{collectorMatAssView.materiali}" var="materiale" id="materialiTable">
+ 
+            <p:column headerText="Materiale">
+                <h:outputText value="#{materiale.prodotto}" />
+            </p:column>
+ 
+            <p:column headerText="Quantità">
+                <f:facet name="header">
+                    <h:outputText value="Quantità" />
+                </f:facet>
+                <h:outputText value="#{materiale.quantita}" />
+            </p:column>
+ 
+            <p:column headerText="Azione">
+                <p:commandLink value="Rimuovi" update="@form" process="@form">
+                    <p:collector value="#{materiale}" removeFrom="#{collectorMatAssView.materiali}" unique="true"/>
+                </p:commandLink>
+            </p:column>
+ 
+        </p:dataTable>
+    </p:outputPanel>
+</h:form>
+
+</html>
